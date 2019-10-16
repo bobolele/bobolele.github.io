@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/10 | boboelele</title>
+  <title>mybatis缓存机制 | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="boboelele">
-<meta property="og:url" content="http://yoursite.com/archives/2019/10/index.html">
+  <meta name="description" content="mybatis缓存机制目的在应用运行期间，可能相同的sql（包括参数也相同）会执行多次。为了避免多次与数据库进行相同的交互，造成IO的损耗，mybatis提供了缓存机制。即，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果,可以提高性能。针对不同的作用域，mybatis提供了一级缓存和二级缓存。">
+<meta name="keywords" content="mybatis,study">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis缓存机制">
+<meta property="og:url" content="http://yoursite.com/2019/10/16/mybatis缓存机制/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="描述">
+<meta property="og:description" content="mybatis缓存机制目的在应用运行期间，可能相同的sql（包括参数也相同）会执行多次。为了避免多次与数据库进行相同的交互，造成IO的损耗，mybatis提供了缓存机制。即，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果,可以提高性能。针对不同的作用域，mybatis提供了一级缓存和二级缓存。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-16T13:38:36.134Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="boboelele">
-<meta name="twitter:description" content="描述">
+<meta name="twitter:title" content="mybatis缓存机制">
+<meta name="twitter:description" content="mybatis缓存机制目的在应用运行期间，可能相同的sql（包括参数也相同）会执行多次。为了避免多次与数据库进行相同的交互，造成IO的损耗，mybatis提供了缓存机制。即，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果,可以提高性能。针对不同的作用域，mybatis提供了一级缓存和二级缓存。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,36 +149,144 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mybatis缓存机制" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/16/mybatis缓存机制/" class="archive-article-date">
-  	<time datetime="2019-10-16T12:46:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/16/mybatis缓存机制/">mybatis缓存机制</a>
+    <h1 class="article-title" itemprop="name">
+      mybatis缓存机制
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2019/10/16/mybatis缓存机制/" class="archive-article-date">
+  	<time datetime="2019-10-16T12:46:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
           
+            
+              <h1 id="mybatis缓存机制"><a href="#mybatis缓存机制" class="headerlink" title="mybatis缓存机制"></a>mybatis缓存机制</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在应用运行期间，可能相同的sql（包括参数也相同）会执行多次。<br>为了避免多次与数据库进行<strong>相同的</strong>交互，造成IO的损耗，mybatis提供了缓存机制。<br>即，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果,可以提高性能。<br>针对不同的作用域，mybatis提供了一级缓存和二级缓存。</p>
+<a id="more"></a>
+
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>一级缓存的作用域：一般是在<code>SESSION</code>内。可以设置为<code>STATEMENT</code>。</li>
+<li>实现逻辑：在每个SqlSession中，持有一个Executor，Excetor中有一个LoaclCache负责存储查询结果。Mybatis会根据当前要执行的Sql语句生成MappedStatemenet，在LoaclCache中查询。如果命中则直接返回，否则查询数据库，将结果放入LoaclCache，最后将结果返回。</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;localCacgeScope&quot; value=&quot;SESSION&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>value有两个可选值，<code>SESSION</code>或<code>STATEMENT</code>。</p>
+<ul>
+<li>SESSION：在一个Mybatis会话中的所有语句，都会共享这一个缓存；</li>
+<li>STATEMENT：只对在当前执行的这个Statement有效。</li>
+</ul>
+<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><ul>
+<li>同一个session，进行多次<strong>完全相同</strong>的查询，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果;</li>
+<li>在执行修改操作之后，<strong>一级缓存失效</strong>；</li>
+</ul>
+<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ul>
+<li>脏读问题：一级缓存只在session内部共享，当其他session修改当前session缓存的数据，当前session是无法感知的。例如：session1缓存了一份数据，此时session2修改该数据在数据库中的值，session1下次查询的时候，获取的是缓存的旧数据，就出现了脏读。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>mybatis一级缓存的生命周期与sqlSession一致 （暂不考虑缓存级别为statement的情况）；</li>
+<li>mybatis一级缓存只是简单维护了一个没有容量限制的HashMap，缓存功能有欠缺（比如缺少过期时间的维护等）；</li>
+<li>mybatis一级缓存最大作用范围在SqlSession内部。有多个session或者分布式的情况下，数据库的写操作会引起脏读的问题。可以设置缓存级别为Statement来解决这个问题。</li>
+</ul>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>二级缓存的作用域：多个SqlSession共享缓存；</li>
+<li>实现逻辑：会使用CachingExecutor来装饰Executor，在进入一级缓存的查询之前，先查询二级缓存；</li>
+</ul>
+<p>ps：<strong>namespace</strong>：二级缓存开启后，同一个namespace下所有操作，都会影响同一个Cache。</p>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><ol>
+<li><p>修改mybatis配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在mybatis的映射XML中配置<code>cache</code>或者<code>cache-ref</code>。</p>
+</li>
+</ol>
+<h3 id="实现效果-1"><a href="#实现效果-1" class="headerlink" title="实现效果"></a>实现效果</h3><ul>
+<li>在一级缓存的基础下，可以实现多个sqlSession共享缓存。</li>
+</ul>
+<h3 id="存在问题-1"><a href="#存在问题-1" class="headerlink" title="存在问题"></a>存在问题</h3><ul>
+<li>当sqlSession没有提交事务的时候（调用commit()），二级缓存不会起作用；</li>
+<li>通常会对每个单表创建单独的映射文件。由于mybatis的二级缓存是基于<code>namespace</code>的，多表查询语句所在的<code>namespace</code>无法感知到其他<code>namespace</code>中的语句所做的修改，会引发脏读问题；</li>
+<li>为了解决脏读问题，可以使用<code>cache-ref</code>，让<code>AMapper</code>引用<code>BMapper</code>的命名空间，这样两个映射文件所对应的SQL操作会使用同一份缓存。不过会引发新的问题，就是缓存的粒度变大，性能受影响。</li>
+</ul>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>mybatis二级缓存相对一级缓存来说，实现了多个SqlSession之间缓存数据的共享；</li>
+<li>但是在多表查询的时候，极大可能引起脏读，有设计上的缺陷，<strong>安全使用二级缓存的条件比较苛刻</strong>；</li>
+<li>在分布式环境下，默认的mybatis二级缓存由于是基于本地，必然会引起在脏读的问题。直接使用redis等分布式缓存更加合适。</li>
+<li>个人觉得，二级缓存使用的场景较少。</li>
+</ul>
+
+            
+          
+      <!-- 
+        <h1 id="mybatis缓存机制"><a href="#mybatis缓存机制" class="headerlink" title="mybatis缓存机制"></a>mybatis缓存机制</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在应用运行期间，可能相同的sql（包括参数也相同）会执行多次。<br>为了避免多次与数据库进行<strong>相同的</strong>交互，造成IO的损耗，mybatis提供了缓存机制。<br>即，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果,可以提高性能。<br>针对不同的作用域，mybatis提供了一级缓存和二级缓存。</p>
+<a id="more"></a>
+
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>一级缓存的作用域：一般是在<code>SESSION</code>内。可以设置为<code>STATEMENT</code>。</li>
+<li>实现逻辑：在每个SqlSession中，持有一个Executor，Excetor中有一个LoaclCache负责存储查询结果。Mybatis会根据当前要执行的Sql语句生成MappedStatemenet，在LoaclCache中查询。如果命中则直接返回，否则查询数据库，将结果放入LoaclCache，最后将结果返回。</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;localCacgeScope&quot; value=&quot;SESSION&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>value有两个可选值，<code>SESSION</code>或<code>STATEMENT</code>。</p>
+<ul>
+<li>SESSION：在一个Mybatis会话中的所有语句，都会共享这一个缓存；</li>
+<li>STATEMENT：只对在当前执行的这个Statement有效。</li>
+</ul>
+<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><ul>
+<li>同一个session，进行多次<strong>完全相同</strong>的查询，只有第一次查询会真正查询数据，后面的查询会直接使用第一次查询的结果;</li>
+<li>在执行修改操作之后，<strong>一级缓存失效</strong>；</li>
+</ul>
+<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ul>
+<li>脏读问题：一级缓存只在session内部共享，当其他session修改当前session缓存的数据，当前session是无法感知的。例如：session1缓存了一份数据，此时session2修改该数据在数据库中的值，session1下次查询的时候，获取的是缓存的旧数据，就出现了脏读。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>mybatis一级缓存的生命周期与sqlSession一致 （暂不考虑缓存级别为statement的情况）；</li>
+<li>mybatis一级缓存只是简单维护了一个没有容量限制的HashMap，缓存功能有欠缺（比如缺少过期时间的维护等）；</li>
+<li>mybatis一级缓存最大作用范围在SqlSession内部。有多个session或者分布式的情况下，数据库的写操作会引起脏读的问题。可以设置缓存级别为Statement来解决这个问题。</li>
+</ul>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>二级缓存的作用域：多个SqlSession共享缓存；</li>
+<li>实现逻辑：会使用CachingExecutor来装饰Executor，在进入一级缓存的查询之前，先查询二级缓存；</li>
+</ul>
+<p>ps：<strong>namespace</strong>：二级缓存开启后，同一个namespace下所有操作，都会影响同一个Cache。</p>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><ol>
+<li><p>修改mybatis配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在mybatis的映射XML中配置<code>cache</code>或者<code>cache-ref</code>。</p>
+</li>
+</ol>
+<h3 id="实现效果-1"><a href="#实现效果-1" class="headerlink" title="实现效果"></a>实现效果</h3><ul>
+<li>在一级缓存的基础下，可以实现多个sqlSession共享缓存。</li>
+</ul>
+<h3 id="存在问题-1"><a href="#存在问题-1" class="headerlink" title="存在问题"></a>存在问题</h3><ul>
+<li>当sqlSession没有提交事务的时候（调用commit()），二级缓存不会起作用；</li>
+<li>通常会对每个单表创建单独的映射文件。由于mybatis的二级缓存是基于<code>namespace</code>的，多表查询语句所在的<code>namespace</code>无法感知到其他<code>namespace</code>中的语句所做的修改，会引发脏读问题；</li>
+<li>为了解决脏读问题，可以使用<code>cache-ref</code>，让<code>AMapper</code>引用<code>BMapper</code>的命名空间，这样两个映射文件所对应的SQL操作会使用同一份缓存。不过会引发新的问题，就是缓存的粒度变大，性能受影响。</li>
+</ul>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>mybatis二级缓存相对一级缓存来说，实现了多个SqlSession之间缓存数据的共享；</li>
+<li>但是在多表查询的时候，极大可能引起脏读，有设计上的缺陷，<strong>安全使用二级缓存的条件比较苛刻</strong>；</li>
+<li>在分布式环境下，默认的mybatis二级缓存由于是基于本地，必然会引起在脏读的问题。直接使用redis等分布式缓存更加合适。</li>
+<li>个人觉得，二级缓存使用的场景较少。</li>
+</ul>
+
+      
+
+       -->
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,68 +302,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/16/mybatis缓存机制/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/15/hexo-博客搭建/" class="archive-article-date">
-  	<time datetime="2019-10-15T12:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/15/hexo-博客搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hexo 博客搭建</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/15/hexo-博客搭建/">hexo 博客搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/blog//" class="article-tag-list-link color5">blog</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -277,8 +424,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
