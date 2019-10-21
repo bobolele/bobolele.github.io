@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: blog | boboelele</title>
+  <title>vue-router传递参数的几种方式 | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="boboelele">
-<meta property="og:url" content="http://yoursite.com/categories/blog/index.html">
+  <meta name="description" content="vue传递参数的几种方式vue-router有两种导航方式，分别是编程式导航(router.push)和声明式导航().">
+<meta name="keywords" content="js,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-router传递参数的几种方式">
+<meta property="og:url" content="http://yoursite.com/2019/10/20/vue-router传递参数的几种方式/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="描述">
+<meta property="og:description" content="vue传递参数的几种方式vue-router有两种导航方式，分别是编程式导航(router.push)和声明式导航().">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-20T13:41:56.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="boboelele">
-<meta name="twitter:description" content="描述">
+<meta name="twitter:title" content="vue-router传递参数的几种方式">
+<meta name="twitter:description" content="vue传递参数的几种方式vue-router有两种导航方式，分别是编程式导航(router.push)和声明式导航().">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,71 +149,257 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vue-router传递参数的几种方式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/15/hexo-博客搭建/" class="archive-article-date">
-  	<time datetime="2019-10-15T12:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/15/hexo-博客搭建/">hexo 博客搭建</a>
+    <h1 class="article-title" itemprop="name">
+      vue-router传递参数的几种方式
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2019/10/20/vue-router传递参数的几种方式/" class="archive-article-date">
+  	<time datetime="2019-10-20T13:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
           
+            
+              <h1 id="vue传递参数的几种方式"><a href="#vue传递参数的几种方式" class="headerlink" title="vue传递参数的几种方式"></a>vue传递参数的几种方式</h1><p>vue-router有两种导航方式，分别是<strong>编程式导航(router.push)</strong>和<strong>声明式导航(<router-link>)</router-link></strong>.</p>
+<a id="more"></a>
+
+<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>编程式导航传递参数分为两种类型：字符串、对象；</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&apos;home&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>这种方式简单但是不能传递参数；</p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>有两种方式传递参数：<strong>命名路由</strong>、<strong>查询参数</strong>；</p>
+<ul>
+<li><strong>命名路由</strong><br>命名路由的前提是在注册路由的时候需要给路由命名：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export default new ROuter(&#123;</span><br><span class="line">    // 省略</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/home&apos;,</span><br><span class="line">        name: &apos;home&apos;,</span><br><span class="line">        component: Home</span><br><span class="line">    &#125;</span><br><span class="line">    // 省略</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>命名路由传递参数使用params来传递,目标原棉接受传递参数使用params</strong>。</p>
+<blockquote>
+<p>命名路由有这种方式传递的参数，如果在目标页面刷新是会出错的。</p>
+</blockquote>
+<p>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.#router.push(&#123;name: &apos;home&apos;, params: &#123; userId: &apos;123&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接受传递的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let userId = this.$router.params.userId</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>查询参数</strong><br>查询参数在路由地址的后面加上参数（类似get方式）；</li>
+<li><em>传递参数使用query必须配合path，目标页面接受传递参数使用query*</em>.</li>
+</ul>
+<p>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.router.push(&#123;path: &apos;/home&apos;, query: &#123;userId: &apos;123&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接受传递的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let userId = this.$router.query.userId</span><br></pre></td></tr></table></figure>
+
+<h2 id="声明式导航"><a href="#声明式导航" class="headerlink" title="声明式导航"></a>声明式导航</h2><p>声明式导航和编程式导航类似。</p>
+<ul>
+<li><p><strong>字符串</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;news&quot;&gt;click to home page&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>命名路由</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123; name: &apos;home&apos;, params: &#123;userId: &apos;123&apos;&#125; &#125;&quot;&gt;click to home page&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查询参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123; path: &apos;/home&apos;, query: &#123; userId: &apos;123&apos;&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>命名路由搭配params，刷新页面参数会丢失；</li>
+<li>查询参数搭配query，刷新页面参数不会丢失；</li>
+<li>接受参数使用<code>this.$router</code>后面搭配路由的名称就能获取到参数的值。</li>
+</ol>
+
+            
+          
+      <!-- 
+        <h1 id="vue传递参数的几种方式"><a href="#vue传递参数的几种方式" class="headerlink" title="vue传递参数的几种方式"></a>vue传递参数的几种方式</h1><p>vue-router有两种导航方式，分别是<strong>编程式导航(router.push)</strong>和<strong>声明式导航(<router-link>)</router-link></strong>.</p>
+<a id="more"></a>
+
+<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>编程式导航传递参数分为两种类型：字符串、对象；</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&apos;home&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>这种方式简单但是不能传递参数；</p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>有两种方式传递参数：<strong>命名路由</strong>、<strong>查询参数</strong>；</p>
+<ul>
+<li><strong>命名路由</strong><br>命名路由的前提是在注册路由的时候需要给路由命名：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export default new ROuter(&#123;</span><br><span class="line">    // 省略</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/home&apos;,</span><br><span class="line">        name: &apos;home&apos;,</span><br><span class="line">        component: Home</span><br><span class="line">    &#125;</span><br><span class="line">    // 省略</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>命名路由传递参数使用params来传递,目标原棉接受传递参数使用params</strong>。</p>
+<blockquote>
+<p>命名路由有这种方式传递的参数，如果在目标页面刷新是会出错的。</p>
+</blockquote>
+<p>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.#router.push(&#123;name: &apos;home&apos;, params: &#123; userId: &apos;123&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接受传递的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let userId = this.$router.params.userId</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>查询参数</strong><br>查询参数在路由地址的后面加上参数（类似get方式）；</li>
+<li><em>传递参数使用query必须配合path，目标页面接受传递参数使用query*</em>.</li>
+</ul>
+<p>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.router.push(&#123;path: &apos;/home&apos;, query: &#123;userId: &apos;123&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接受传递的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let userId = this.$router.query.userId</span><br></pre></td></tr></table></figure>
+
+<h2 id="声明式导航"><a href="#声明式导航" class="headerlink" title="声明式导航"></a>声明式导航</h2><p>声明式导航和编程式导航类似。</p>
+<ul>
+<li><p><strong>字符串</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;news&quot;&gt;click to home page&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>命名路由</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123; name: &apos;home&apos;, params: &#123;userId: &apos;123&apos;&#125; &#125;&quot;&gt;click to home page&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查询参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123; path: &apos;/home&apos;, query: &#123; userId: &apos;123&apos;&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>命名路由搭配params，刷新页面参数会丢失；</li>
+<li>查询参数搭配query，刷新页面参数不会丢失；</li>
+<li>接受参数使用<code>this.$router</code>后面搭配路由的名称就能获取到参数的值。</li>
+</ol>
+
+      
+
+       -->
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/blog//" class="article-tag-list-link color5">blog</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
 	</div>
 
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/20/vue-router传递参数的几种方式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/10/18/java并发之AQS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java并发之AQS</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -235,10 +422,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
