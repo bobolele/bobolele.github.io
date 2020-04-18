@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>CentOS7下Hadooop3.2.1部署（单机模式） | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表中不重要）。">
+  <meta name="description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。">
 <meta name="keywords" content="关键字">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS7下Hadooop3.2.1部署（单机模式）">
 <meta property="og:url" content="http://yoursite.com/2020/04/18/CentOS7下Hadooop3-2-1部署（单机模式）/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表中不重要）。">
+<meta property="og:description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.csdn.net/xyf123/article/details/50263645/">
 <meta property="og:image" content="https://www.apache.org/dyn/closer.cgi/hadoop/common">
-<meta property="og:updated_time" content="2020-04-18T08:22:08.328Z">
+<meta property="og:updated_time" content="2020-04-18T08:23:58.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7下Hadooop3.2.1部署（单机模式）">
-<meta name="twitter:description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表中不重要）。">
+<meta name="twitter:description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。">
 <meta name="twitter:image" content="https://blog.csdn.net/xyf123/article/details/50263645/">
   
   
@@ -174,7 +174,7 @@
         
           
             
-              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于Hadoop的部署，主要有单机、伪集群、集群三种模式。<br>在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。<br>为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表中不重要）。</p>
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于Hadoop的部署，主要有单机、伪集群、集群三种模式。<br>在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。<br>为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。</p>
 <a id="more"></a>
 <h1 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h1><h2 id="配置JDK环境"><a href="#配置JDK环境" class="headerlink" title="配置JDK环境"></a>配置JDK环境</h2><p>配置jdk环境的步骤，这里不做详细介绍。需要注意的是，建议使用jdk8。我在部署期间，使用了jdk14导致Hadoop没有正常启动。</p>
 <h2 id="修改HOSTS配置"><a href="#修改HOSTS配置" class="headerlink" title="修改HOSTS配置"></a>修改HOSTS配置</h2><p>修改<code>/etc/hosts</code>文件，在末尾添加一行：</p>
@@ -253,7 +253,7 @@
             
           
       <!-- 
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于Hadoop的部署，主要有单机、伪集群、集群三种模式。<br>在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。<br>为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表中不重要）。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于Hadoop的部署，主要有单机、伪集群、集群三种模式。<br>在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。<br>为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。</p>
 <a id="more"></a>
 <h1 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h1><h2 id="配置JDK环境"><a href="#配置JDK环境" class="headerlink" title="配置JDK环境"></a>配置JDK环境</h2><p>配置jdk环境的步骤，这里不做详细介绍。需要注意的是，建议使用jdk8。我在部署期间，使用了jdk14导致Hadoop没有正常启动。</p>
 <h2 id="修改HOSTS配置"><a href="#修改HOSTS配置" class="headerlink" title="修改HOSTS配置"></a>修改HOSTS配置</h2><p>修改<code>/etc/hosts</code>文件，在末尾添加一行：</p>
