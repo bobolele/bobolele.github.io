@@ -16,13 +16,10 @@
 <meta property="og:site_name" content="boboelele">
 <meta property="og:description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog.csdn.net/xyf123/article/details/50263645/">
-<meta property="og:image" content="https://www.apache.org/dyn/closer.cgi/hadoop/common">
-<meta property="og:updated_time" content="2020-04-18T08:26:12.197Z">
+<meta property="og:updated_time" content="2020-04-18T09:51:34.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7下Hadoop3.2.1部署（单机模式）">
 <meta name="twitter:description" content="前言关于Hadoop的部署，主要有单机、伪集群、集群三种模式。在官网有相应的部署步骤以及配置说明。但是由于官网的文档太过简略，所以这里作为一个补充（感觉Hadoop官方文档不适合入门，适合做参考书）。为了更快的体验Hadoop，本文采用的是单机模式部署。其中关于JDK配置、SSH免密登录相关步骤，没有纳入本文中（但不代表这不重要）。">
-<meta name="twitter:image" content="https://blog.csdn.net/xyf123/article/details/50263645/">
   
   
     <link rel="icon" href="/favicon.png">
@@ -180,16 +177,11 @@
 <h2 id="修改HOSTS配置"><a href="#修改HOSTS配置" class="headerlink" title="修改HOSTS配置"></a>修改HOSTS配置</h2><p>修改<code>/etc/hosts</code>文件，在末尾添加一行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   hadoop001</span><br></pre></td></tr></table></figure>
 
-<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><ol>
-<li><p>永久生效<br>修改 <code>/etc/selinux/config</code> 文件中的 <code>SELINUX=enforcing</code> 修改为<code>SELINUX=disabled</code>，然后重启。</p>
-</li>
-<li><p>临时生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><h3 id="永久生效"><a href="#永久生效" class="headerlink" title="永久生效"></a>永久生效</h3><p>修改 <code>/etc/selinux/config</code> 文件中的 <code>SELINUX=enforcing</code> 修改为<code>SELINUX=disabled</code>，然后重启。</p>
+<h3 id="临时生效"><a href="#临时生效" class="headerlink" title="临时生效"></a>临时生效</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h2 id="配置本机SSH免密码登录"><a href="#配置本机SSH免密码登录" class="headerlink" title="配置本机SSH免密码登录"></a>配置本机SSH免密码登录</h2><p><font color="red">这段很重要，而且容易被忽视</font><br>本文默认使用的是root账户启动Hadoop，关于如何设置免密登录，可以查看<img src="https://blog.csdn.net/xyf123/article/details/50263645/" alt="这里">，这里不做过多介绍。</p>
-<h2 id="下载Hadoop安装包"><a href="#下载Hadoop安装包" class="headerlink" title="下载Hadoop安装包"></a>下载Hadoop安装包</h2><p>下载地址<img src="https://www.apache.org/dyn/closer.cgi/hadoop/common" alt="Hadoop"><br>本文中，使用的是版本是<code>Hadoop-3.2.1.tar.gz</code>。</p>
+<h2 id="配置本机SSH免密码登录"><a href="#配置本机SSH免密码登录" class="headerlink" title="配置本机SSH免密码登录"></a>配置本机SSH免密码登录</h2><p><font color="red">这段很重要，而且容易被忽视</font><br>本文默认使用的是root账户启动Hadoop，关于如何设置免密登录，可以查看<a href="https://blog.csdn.net/xyf123/article/details/50263645/" target="_blank" rel="noopener">这里</a>，这里不做过多介绍。</p>
+<h2 id="下载Hadoop安装包"><a href="#下载Hadoop安装包" class="headerlink" title="下载Hadoop安装包"></a>下载Hadoop安装包</h2><p>下载地址<a href="https://www.apache.org/dyn/closer.cgi/hadoop/common" target="_blank" rel="noopener">Hadoop</a><br>本文中，使用的是版本是<code>Hadoop-3.2.1.tar.gz</code>。</p>
 <h1 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h1><h2 id="解压Hadoop安装包"><a href="#解压Hadoop安装包" class="headerlink" title="解压Hadoop安装包"></a>解压Hadoop安装包</h2><p>解压Hadoop安装包到安装目录<code>/usr/local</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf hadoop-3.2.1.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure>
 
@@ -211,35 +203,51 @@
 <h3 id="yarn-site-xml"><a href="#yarn-site-xml" class="headerlink" title="yarn-site.xml"></a>yarn-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Site specific YARN configuration properties --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">final</span>&gt;</span>true<span class="tag">&lt;/<span class="name">final</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="启动Hadoop"><a href="#启动Hadoop" class="headerlink" title="启动Hadoop"></a>启动Hadoop</h1><h2 id="启动NameNode"><a href="#启动NameNode" class="headerlink" title="启动NameNode"></a>启动NameNode</h2><p>如果是第一次启动HDFS，则需要先进行格式化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># hdfs namenode -format</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs namenode -format</span><br></pre></td></tr></table></figure>
 
-<p>否则就执行启动NameNode：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs --daemon start namenode</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 启动DataNode</span><br><span class="line">执行命令：</span><br></pre></td></tr></table></figure>
+<p>否则就直接启动NameNode：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs --daemon start namenode</span><br></pre></td></tr></table></figure>
 
-<h1 id="hdfs-–daemon-start-datanode"><a href="#hdfs-–daemon-start-datanode" class="headerlink" title="hdfs –daemon start datanode"></a>hdfs –daemon start datanode</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 验证NameNode和DataNode是否启动成功</span><br><span class="line">1. 利用Jps查看：</span><br></pre></td></tr></table></figure>
+<h2 id="启动DataNode"><a href="#启动DataNode" class="headerlink" title="启动DataNode"></a>启动DataNode</h2><p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs --daemon start datanode</span><br></pre></td></tr></table></figure>
 
-<h1 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h1><p>12314 Jps<br>534543 NameNode<br>123213 DataNode</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2. 在浏览器输入`http://$&#123;ip&#125;:50070`:</span><br><span class="line">可以正常出现HDFS的管理页面。</span><br><span class="line"></span><br><span class="line">ps： 如果没有启动成功，可以查看`%HADOOP_HOME%/logs/`目录下的日志进行错误排查。</span><br><span class="line"></span><br><span class="line">## 启动Yarn</span><br><span class="line">在启动Yarn前，需要配置ssh免密登录,详情参考`部署前准备`。</span><br></pre></td></tr></table></figure>
+<h2 id="验证NameNode和DataNode是否启动成功"><a href="#验证NameNode和DataNode是否启动成功" class="headerlink" title="验证NameNode和DataNode是否启动成功"></a>验证NameNode和DataNode是否启动成功</h2><ol>
+<li><p>利用Jps查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jps</span><br><span class="line">12314 Jps</span><br><span class="line">534543 NameNode</span><br><span class="line">123213 DataNode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器输入<code>http://${ip}:50070</code>:<br>可以正常出现HDFS的管理页面。</p>
+</li>
+</ol>
+<p>ps： 如果没有启动成功，可以查看<code>%HADOOP_HOME%/logs/</code>目录下的日志进行错误排查。</p>
+<h2 id="启动Yarn"><a href="#启动Yarn" class="headerlink" title="启动Yarn"></a>启动Yarn</h2><p>在启动Yarn前，需要配置ssh免密登录,详情参考<code>部署前准备</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ start-yarn.sh</span><br><span class="line">Starting resourcemanager</span><br><span class="line">Starting nodemanagers</span><br></pre></td></tr></table></figure>
 
-<h1 id="start-yarn-sh"><a href="#start-yarn-sh" class="headerlink" title="start-yarn.sh"></a>start-yarn.sh</h1><p>Starting resourcemanager<br>Starting nodemanagers</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 验证Yarn是否启动成功</span><br><span class="line">1. 使用Jps查看：</span><br></pre></td></tr></table></figure>
+<h2 id="验证Yarn是否启动成功"><a href="#验证Yarn是否启动成功" class="headerlink" title="验证Yarn是否启动成功"></a>验证Yarn是否启动成功</h2><ol>
+<li><p>使用Jps查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ jps</span><br><span class="line">23442 Jps</span><br><span class="line">53412 NameNode</span><br><span class="line">53393 DataNode</span><br><span class="line">45452 ResourceManeger</span><br><span class="line">23423 NodeMnager</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器输入<code>http://${ip}:8088</code>:<br>可以正常访问Yarn的管理页面。</p>
+</li>
+</ol>
+<h1 id="体验Hadoop"><a href="#体验Hadoop" class="headerlink" title="体验Hadoop"></a>体验Hadoop</h1><ol>
+<li><p>创建文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs dfs mkdir /input</span><br><span class="line">$ hdfs dfs mkdir /output</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs dfs -ls /</span><br><span class="line">Found 2 items</span><br><span class="line">drwxr-xr-x   - hadoop supergroup          0 2020-02-13 15:01 /input</span><br><span class="line">drwxr-xr-x   - hadoop supergroup          0 2020-02-13 14:57 /output</span><br></pre></td></tr></table></figure>
 
-<h1 id="jps-1"><a href="#jps-1" class="headerlink" title="jps"></a>jps</h1><p>23442 Jps<br>53412 NameNode<br>53393 DataNode<br>45452 ResourceManeger<br>23423 NodeMnager</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 在浏览器输入`http://$&#123;ip&#125;:8088`:</span><br><span class="line">可以正常访问Yarn的管理页面。</span><br><span class="line"></span><br><span class="line"># 体验Hadoop</span><br><span class="line">1. 创建文件夹</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="使用root账户配置的Hadoop启动出现报错"><a href="#使用root账户配置的Hadoop启动出现报错" class="headerlink" title="使用root账户配置的Hadoop启动出现报错"></a>使用root账户配置的Hadoop启动出现报错</h2><p><font color="red">这基本上可以说是必定出现，因为本文没有为Hadoop配置专门的用户。</font><br>错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Starting namenodes on [master]</span><br><span class="line">ERROR: Attempting to operate on hdfs namenode as root</span><br><span class="line"></span><br><span class="line">ERROR: but there is no HDFS_NAMENODE_USER defined. Aborting operation.</span><br><span class="line"></span><br><span class="line">Starting datanodes</span><br><span class="line">ERROR: Attempting to operate on hdfs datanode as root</span><br><span class="line"></span><br><span class="line">ERROR: but there is no HDFS_DATANODE_USER defined. Aborting operation.</span><br><span class="line">Starting secondary namenodes [slave1]</span><br><span class="line">ERROR: Attempting to operate on hdfs secondarynamenode as root</span><br><span class="line">ERROR: but there is no HDFS_SECONDARYNAMENODE_USER defined. Aborting operation.</span><br></pre></td></tr></table></figure>
 
-<h1 id="hdfs-dfs-mkdir-input"><a href="#hdfs-dfs-mkdir-input" class="headerlink" title="hdfs dfs mkdir /input"></a>hdfs dfs mkdir /input</h1><h1 id="hdfs-dfs-mkdir-output"><a href="#hdfs-dfs-mkdir-output" class="headerlink" title="hdfs dfs mkdir /output"></a>hdfs dfs mkdir /output</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 查看目录</span><br></pre></td></tr></table></figure>
-
-<h1 id="hdfs-dfs-ls"><a href="#hdfs-dfs-ls" class="headerlink" title="hdfs dfs -ls /"></a>hdfs dfs -ls /</h1><p>Found 2 items<br>drwxr-xr-x   - hadoop supergroup          0 2020-02-13 15:01 /input<br>drwxr-xr-x   - hadoop supergroup          0 2020-02-13 14:57 /output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 常见问题</span><br><span class="line">## 使用root账户配置的Hadoop启动出现报错</span><br><span class="line">&lt;font color=&quot;red&quot;&gt;这基本上可以说是必定出现，因为本文没有为Hadoop配置专门的用户。&lt;/font&gt;</span><br><span class="line">错误信息：</span><br></pre></td></tr></table></figure>
-
-<p> Starting namenodes on [master]<br> ERROR: Attempting to operate on hdfs namenode as root</p>
-<p> ERROR: but there is no HDFS_NAMENODE_USER defined. Aborting operation.</p>
-<p> Starting datanodes<br> ERROR: Attempting to operate on hdfs datanode as root</p>
-<p> ERROR: but there is no HDFS_DATANODE_USER defined. Aborting operation.<br> Starting secondary namenodes [slave1]<br> ERROR: Attempting to operate on hdfs secondarynamenode as root<br> ERROR: but there is no HDFS_SECONDARYNAMENODE_USER defined. Aborting operation.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">解决办法：</span><br><span class="line">1. 在sbin目录下，修改`start-dfs.sh`、`stop-dfs.sh`,在文件顶部添加：</span><br><span class="line">```sh</span><br><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在sbin目录下，修改<code>start-yarn.sh</code>、<code>stop-yarn.sh</code>，在文件顶部添加:<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<ol>
+<li><p>在sbin目录下，修改<code>start-dfs.sh</code>、<code>stop-dfs.sh</code>,在文件顶部添加：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在sbin目录下，修改<code>start-yarn.sh</code>、<code>stop-yarn.sh</code>，在文件顶部添加:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -247,7 +255,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">WARNING: HADOOP_SECURE_DN_USER has been replaced by HDFS_DATANODE_SECURE_USER. Using value of HADOOP_SECURE_DN_USER.</span><br><span class="line">Starting namenodes on [mylinux_1]</span><br><span class="line">mylinux_1: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br><span class="line">Starting datanodes</span><br><span class="line">localhost: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br><span class="line">Starting secondary namenodes [mylinux_1]</span><br><span class="line">mylinux_1: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br><span class="line">2018-11-26 09:32:18,082 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Starting resourcemanager</span><br><span class="line">Starting nodemanagers</span><br><span class="line">localhost: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br></pre></td></tr></table></figure>
 
 <p>解决办法：<br>配置SSH免密登录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ssh-keygen -t rsa</span><br><span class="line"># ssh-copy-id -i ~/.ssh/id_rsa.pub root@$&#123;ip&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br><span class="line">$ ssh-copy-id -i ~/.ssh/id_rsa.pub root@$&#123;ip&#125;</span><br></pre></td></tr></table></figure>
 
 
             
@@ -259,16 +267,11 @@
 <h2 id="修改HOSTS配置"><a href="#修改HOSTS配置" class="headerlink" title="修改HOSTS配置"></a>修改HOSTS配置</h2><p>修改<code>/etc/hosts</code>文件，在末尾添加一行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   hadoop001</span><br></pre></td></tr></table></figure>
 
-<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><ol>
-<li><p>永久生效<br>修改 <code>/etc/selinux/config</code> 文件中的 <code>SELINUX=enforcing</code> 修改为<code>SELINUX=disabled</code>，然后重启。</p>
-</li>
-<li><p>临时生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><h3 id="永久生效"><a href="#永久生效" class="headerlink" title="永久生效"></a>永久生效</h3><p>修改 <code>/etc/selinux/config</code> 文件中的 <code>SELINUX=enforcing</code> 修改为<code>SELINUX=disabled</code>，然后重启。</p>
+<h3 id="临时生效"><a href="#临时生效" class="headerlink" title="临时生效"></a>临时生效</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h2 id="配置本机SSH免密码登录"><a href="#配置本机SSH免密码登录" class="headerlink" title="配置本机SSH免密码登录"></a>配置本机SSH免密码登录</h2><p><font color="red">这段很重要，而且容易被忽视</font><br>本文默认使用的是root账户启动Hadoop，关于如何设置免密登录，可以查看<img src="https://blog.csdn.net/xyf123/article/details/50263645/" alt="这里">，这里不做过多介绍。</p>
-<h2 id="下载Hadoop安装包"><a href="#下载Hadoop安装包" class="headerlink" title="下载Hadoop安装包"></a>下载Hadoop安装包</h2><p>下载地址<img src="https://www.apache.org/dyn/closer.cgi/hadoop/common" alt="Hadoop"><br>本文中，使用的是版本是<code>Hadoop-3.2.1.tar.gz</code>。</p>
+<h2 id="配置本机SSH免密码登录"><a href="#配置本机SSH免密码登录" class="headerlink" title="配置本机SSH免密码登录"></a>配置本机SSH免密码登录</h2><p><font color="red">这段很重要，而且容易被忽视</font><br>本文默认使用的是root账户启动Hadoop，关于如何设置免密登录，可以查看<a href="https://blog.csdn.net/xyf123/article/details/50263645/" target="_blank" rel="noopener">这里</a>，这里不做过多介绍。</p>
+<h2 id="下载Hadoop安装包"><a href="#下载Hadoop安装包" class="headerlink" title="下载Hadoop安装包"></a>下载Hadoop安装包</h2><p>下载地址<a href="https://www.apache.org/dyn/closer.cgi/hadoop/common" target="_blank" rel="noopener">Hadoop</a><br>本文中，使用的是版本是<code>Hadoop-3.2.1.tar.gz</code>。</p>
 <h1 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h1><h2 id="解压Hadoop安装包"><a href="#解压Hadoop安装包" class="headerlink" title="解压Hadoop安装包"></a>解压Hadoop安装包</h2><p>解压Hadoop安装包到安装目录<code>/usr/local</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf hadoop-3.2.1.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure>
 
@@ -290,35 +293,51 @@
 <h3 id="yarn-site-xml"><a href="#yarn-site-xml" class="headerlink" title="yarn-site.xml"></a>yarn-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Site specific YARN configuration properties --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">final</span>&gt;</span>true<span class="tag">&lt;/<span class="name">final</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="启动Hadoop"><a href="#启动Hadoop" class="headerlink" title="启动Hadoop"></a>启动Hadoop</h1><h2 id="启动NameNode"><a href="#启动NameNode" class="headerlink" title="启动NameNode"></a>启动NameNode</h2><p>如果是第一次启动HDFS，则需要先进行格式化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># hdfs namenode -format</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs namenode -format</span><br></pre></td></tr></table></figure>
 
-<p>否则就执行启动NameNode：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs --daemon start namenode</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 启动DataNode</span><br><span class="line">执行命令：</span><br></pre></td></tr></table></figure>
+<p>否则就直接启动NameNode：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs --daemon start namenode</span><br></pre></td></tr></table></figure>
 
-<h1 id="hdfs-–daemon-start-datanode"><a href="#hdfs-–daemon-start-datanode" class="headerlink" title="hdfs –daemon start datanode"></a>hdfs –daemon start datanode</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 验证NameNode和DataNode是否启动成功</span><br><span class="line">1. 利用Jps查看：</span><br></pre></td></tr></table></figure>
+<h2 id="启动DataNode"><a href="#启动DataNode" class="headerlink" title="启动DataNode"></a>启动DataNode</h2><p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs --daemon start datanode</span><br></pre></td></tr></table></figure>
 
-<h1 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h1><p>12314 Jps<br>534543 NameNode<br>123213 DataNode</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2. 在浏览器输入`http://$&#123;ip&#125;:50070`:</span><br><span class="line">可以正常出现HDFS的管理页面。</span><br><span class="line"></span><br><span class="line">ps： 如果没有启动成功，可以查看`%HADOOP_HOME%/logs/`目录下的日志进行错误排查。</span><br><span class="line"></span><br><span class="line">## 启动Yarn</span><br><span class="line">在启动Yarn前，需要配置ssh免密登录,详情参考`部署前准备`。</span><br></pre></td></tr></table></figure>
+<h2 id="验证NameNode和DataNode是否启动成功"><a href="#验证NameNode和DataNode是否启动成功" class="headerlink" title="验证NameNode和DataNode是否启动成功"></a>验证NameNode和DataNode是否启动成功</h2><ol>
+<li><p>利用Jps查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jps</span><br><span class="line">12314 Jps</span><br><span class="line">534543 NameNode</span><br><span class="line">123213 DataNode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器输入<code>http://${ip}:50070</code>:<br>可以正常出现HDFS的管理页面。</p>
+</li>
+</ol>
+<p>ps： 如果没有启动成功，可以查看<code>%HADOOP_HOME%/logs/</code>目录下的日志进行错误排查。</p>
+<h2 id="启动Yarn"><a href="#启动Yarn" class="headerlink" title="启动Yarn"></a>启动Yarn</h2><p>在启动Yarn前，需要配置ssh免密登录,详情参考<code>部署前准备</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ start-yarn.sh</span><br><span class="line">Starting resourcemanager</span><br><span class="line">Starting nodemanagers</span><br></pre></td></tr></table></figure>
 
-<h1 id="start-yarn-sh"><a href="#start-yarn-sh" class="headerlink" title="start-yarn.sh"></a>start-yarn.sh</h1><p>Starting resourcemanager<br>Starting nodemanagers</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 验证Yarn是否启动成功</span><br><span class="line">1. 使用Jps查看：</span><br></pre></td></tr></table></figure>
+<h2 id="验证Yarn是否启动成功"><a href="#验证Yarn是否启动成功" class="headerlink" title="验证Yarn是否启动成功"></a>验证Yarn是否启动成功</h2><ol>
+<li><p>使用Jps查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ jps</span><br><span class="line">23442 Jps</span><br><span class="line">53412 NameNode</span><br><span class="line">53393 DataNode</span><br><span class="line">45452 ResourceManeger</span><br><span class="line">23423 NodeMnager</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器输入<code>http://${ip}:8088</code>:<br>可以正常访问Yarn的管理页面。</p>
+</li>
+</ol>
+<h1 id="体验Hadoop"><a href="#体验Hadoop" class="headerlink" title="体验Hadoop"></a>体验Hadoop</h1><ol>
+<li><p>创建文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs dfs mkdir /input</span><br><span class="line">$ hdfs dfs mkdir /output</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs dfs -ls /</span><br><span class="line">Found 2 items</span><br><span class="line">drwxr-xr-x   - hadoop supergroup          0 2020-02-13 15:01 /input</span><br><span class="line">drwxr-xr-x   - hadoop supergroup          0 2020-02-13 14:57 /output</span><br></pre></td></tr></table></figure>
 
-<h1 id="jps-1"><a href="#jps-1" class="headerlink" title="jps"></a>jps</h1><p>23442 Jps<br>53412 NameNode<br>53393 DataNode<br>45452 ResourceManeger<br>23423 NodeMnager</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 在浏览器输入`http://$&#123;ip&#125;:8088`:</span><br><span class="line">可以正常访问Yarn的管理页面。</span><br><span class="line"></span><br><span class="line"># 体验Hadoop</span><br><span class="line">1. 创建文件夹</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="使用root账户配置的Hadoop启动出现报错"><a href="#使用root账户配置的Hadoop启动出现报错" class="headerlink" title="使用root账户配置的Hadoop启动出现报错"></a>使用root账户配置的Hadoop启动出现报错</h2><p><font color="red">这基本上可以说是必定出现，因为本文没有为Hadoop配置专门的用户。</font><br>错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Starting namenodes on [master]</span><br><span class="line">ERROR: Attempting to operate on hdfs namenode as root</span><br><span class="line"></span><br><span class="line">ERROR: but there is no HDFS_NAMENODE_USER defined. Aborting operation.</span><br><span class="line"></span><br><span class="line">Starting datanodes</span><br><span class="line">ERROR: Attempting to operate on hdfs datanode as root</span><br><span class="line"></span><br><span class="line">ERROR: but there is no HDFS_DATANODE_USER defined. Aborting operation.</span><br><span class="line">Starting secondary namenodes [slave1]</span><br><span class="line">ERROR: Attempting to operate on hdfs secondarynamenode as root</span><br><span class="line">ERROR: but there is no HDFS_SECONDARYNAMENODE_USER defined. Aborting operation.</span><br></pre></td></tr></table></figure>
 
-<h1 id="hdfs-dfs-mkdir-input"><a href="#hdfs-dfs-mkdir-input" class="headerlink" title="hdfs dfs mkdir /input"></a>hdfs dfs mkdir /input</h1><h1 id="hdfs-dfs-mkdir-output"><a href="#hdfs-dfs-mkdir-output" class="headerlink" title="hdfs dfs mkdir /output"></a>hdfs dfs mkdir /output</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 查看目录</span><br></pre></td></tr></table></figure>
-
-<h1 id="hdfs-dfs-ls"><a href="#hdfs-dfs-ls" class="headerlink" title="hdfs dfs -ls /"></a>hdfs dfs -ls /</h1><p>Found 2 items<br>drwxr-xr-x   - hadoop supergroup          0 2020-02-13 15:01 /input<br>drwxr-xr-x   - hadoop supergroup          0 2020-02-13 14:57 /output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 常见问题</span><br><span class="line">## 使用root账户配置的Hadoop启动出现报错</span><br><span class="line">&lt;font color=&quot;red&quot;&gt;这基本上可以说是必定出现，因为本文没有为Hadoop配置专门的用户。&lt;/font&gt;</span><br><span class="line">错误信息：</span><br></pre></td></tr></table></figure>
-
-<p> Starting namenodes on [master]<br> ERROR: Attempting to operate on hdfs namenode as root</p>
-<p> ERROR: but there is no HDFS_NAMENODE_USER defined. Aborting operation.</p>
-<p> Starting datanodes<br> ERROR: Attempting to operate on hdfs datanode as root</p>
-<p> ERROR: but there is no HDFS_DATANODE_USER defined. Aborting operation.<br> Starting secondary namenodes [slave1]<br> ERROR: Attempting to operate on hdfs secondarynamenode as root<br> ERROR: but there is no HDFS_SECONDARYNAMENODE_USER defined. Aborting operation.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">解决办法：</span><br><span class="line">1. 在sbin目录下，修改`start-dfs.sh`、`stop-dfs.sh`,在文件顶部添加：</span><br><span class="line">```sh</span><br><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在sbin目录下，修改<code>start-yarn.sh</code>、<code>stop-yarn.sh</code>，在文件顶部添加:<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<ol>
+<li><p>在sbin目录下，修改<code>start-dfs.sh</code>、<code>stop-dfs.sh</code>,在文件顶部添加：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在sbin目录下，修改<code>start-yarn.sh</code>、<code>stop-yarn.sh</code>，在文件顶部添加:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -326,7 +345,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">WARNING: HADOOP_SECURE_DN_USER has been replaced by HDFS_DATANODE_SECURE_USER. Using value of HADOOP_SECURE_DN_USER.</span><br><span class="line">Starting namenodes on [mylinux_1]</span><br><span class="line">mylinux_1: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br><span class="line">Starting datanodes</span><br><span class="line">localhost: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br><span class="line">Starting secondary namenodes [mylinux_1]</span><br><span class="line">mylinux_1: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br><span class="line">2018-11-26 09:32:18,082 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Starting resourcemanager</span><br><span class="line">Starting nodemanagers</span><br><span class="line">localhost: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).</span><br></pre></td></tr></table></figure>
 
 <p>解决办法：<br>配置SSH免密登录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ssh-keygen -t rsa</span><br><span class="line"># ssh-copy-id -i ~/.ssh/id_rsa.pub root@$&#123;ip&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br><span class="line">$ ssh-copy-id -i ~/.ssh/id_rsa.pub root@$&#123;ip&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -410,6 +429,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/04/18/Java编程调用HDFS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java编程调用HDFS
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/25/java比较时间/" id="article-nav-older" class="article-nav-link-wrap">
@@ -543,11 +571,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,6 +591,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">oracle</a>
               </li>
              
@@ -571,11 +607,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
               </li>
             
             <div class="clearfix"></div>

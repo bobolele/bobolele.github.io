@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | boboelele</title>
+  <title>Java编程调用HDFS | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="boboelele">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="前言HDFS（Hadoop Distributed File System），即Hadoop分布式文件系统，是Hadooop的核心部分之一。 在开发期间，需要将数据提前放到HDFS上，才可以进行分布式计算。Hadoop自带的命令行，提供了一套非常完整的命令接口。不过，我们用到的更多的是在程序中直接访问HDFS。本文将使用Java语言，实现对HDFS的操作。">
+<meta name="keywords" content="HDFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程调用HDFS">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/Java编程调用HDFS/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="描述">
+<meta property="og:description" content="前言HDFS（Hadoop Distributed File System），即Hadoop分布式文件系统，是Hadooop的核心部分之一。 在开发期间，需要将数据提前放到HDFS上，才可以进行分布式计算。Hadoop自带的命令行，提供了一套非常完整的命令接口。不过，我们用到的更多的是在程序中直接访问HDFS。本文将使用Java语言，实现对HDFS的操作。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-18T13:33:02.959Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="boboelele">
-<meta name="twitter:description" content="描述">
+<meta name="twitter:title" content="Java编程调用HDFS">
+<meta name="twitter:description" content="前言HDFS（Hadoop Distributed File System），即Hadoop分布式文件系统，是Hadooop的核心部分之一。 在开发期间，需要将数据提前放到HDFS上，才可以进行分布式计算。Hadoop自带的命令行，提供了一套非常完整的命令接口。不过，我们用到的更多的是在程序中直接访问HDFS。本文将使用Java语言，实现对HDFS的操作。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,319 +149,324 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-Java编程调用HDFS" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java编程调用HDFS
+    </h1>
+  
+
+        
+        <a href="/2020/04/18/Java编程调用HDFS/" class="archive-article-date">
+  	<time datetime="2020-04-18T08:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+          
             
-  
-  
-    
-    
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>HDFS（Hadoop Distributed File System），即Hadoop分布式文件系统，是Hadooop的核心部分之一。 在开发期间，需要将数据提前放到HDFS上，才可以进行分布式计算。<br>Hadoop自带的命令行，提供了一套非常完整的命令接口。不过，我们用到的更多的是在程序中直接访问HDFS。<br>本文将使用Java语言，实现对HDFS的操作。</p>
+<a id="more"></a>
+<p>在阅读本文之前，我希望你具有以下技能：</p>
+<ol>
+<li>熟悉Java语言，若能知道Java8的Lambda表达式将会更好；</li>
+<li>了解Maven；</li>
+<li>了解Spring，若知道Spring Boot将会更好；</li>
+<li>如果了解命令模式就更好了，不了解也没有关系。</li>
+</ol>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="Hadoop环境"><a href="#Hadoop环境" class="headerlink" title="Hadoop环境"></a>Hadoop环境</h2><p>在<a href="https://bobolele.github.io/2020/04/18/CentOS7%E4%B8%8BHadooop3-2-1%E9%83%A8%E7%BD%B2%EF%BC%88%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%89/" target="_blank" rel="noopener">CentOS7下Hadoop3.2.1部署</a>中，介绍了如何部署单机版本的Hadoop。如果没有Hadoop开发环境，需要先部署。</p>
+<ol>
+<li>Linux Centos7</li>
+<li>Java 1.8</li>
+<li>Hadoop 3.2.1</li>
+</ol>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ol>
+<li>win/linux/mac 不限</li>
+<li>Java 1.8</li>
+<li>Maven 3</li>
+<li>idea/eclipse/vs code 不限</li>
+</ol>
+<h1 id="实现ls命令"><a href="#实现ls命令" class="headerlink" title="实现ls命令"></a>实现ls命令</h1><h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>在<code>pom.xml</code>中添加以下依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.FileStatus;</span><br><span class="line">import org.apache.hadoop.fs.FileSystem;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.URI;</span><br><span class="line"></span><br><span class="line">import static org.junit.jupiter.api.Assertions.assertTrue;</span><br><span class="line">import static org.junit.jupiter.api.Assertions.fail;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">public class BaseTests &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void invokeTest() &#123;</span><br><span class="line">        String nameNode = &quot;hdfs://10.211.55.6:9001/&quot;;</span><br><span class="line">        String path = &quot;/input&quot;;</span><br><span class="line"></span><br><span class="line">        // Hadoop配置</span><br><span class="line">        Configuration configuration = new Configuration();</span><br><span class="line"></span><br><span class="line">        URI uri = URI.create(nameNode);</span><br><span class="line"></span><br><span class="line">        try (</span><br><span class="line">                // Hadoop 文件系统</span><br><span class="line">                FileSystem fs = FileSystem.get(uri, configuration);</span><br><span class="line">        ) &#123;</span><br><span class="line">            // 判断目录是否存在</span><br><span class="line">            boolean isExists = fs.exists(new Path(path));</span><br><span class="line">            assertTrue(isExists);</span><br><span class="line"></span><br><span class="line">            // 列举文件</span><br><span class="line">            FileStatus[] listStatus = fs.listStatus(new Path(path));</span><br><span class="line">            log.info(&quot;查询结果: &#123;&#125;&quot;, listStatus);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            fail(&quot;出现了IO异常&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>日志打印如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2020-04-18 20:52:55.667  INFO   --- [           main] i.b.tutorial.hadoop.hdfs.BaseTests       : 查询结果: FileStatus&#123;path=hdfs://10.211.55.6:9001/input/1.txt; isDirectory=false; length=85; replication=1; blocksize=134217728; modification_time=1587033885600; access_time=1587044879940; owner=root; group=supergroup; permission=rw-r--r--; isSymlink=false&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>我在<code>/input</code>目录下放了一些文件夹和文件，所以这里会打印所有的文件和目录。如果该目录下为空，也不会打印任何东西;</li>
+<li>这里使用了junit的单元测试，也可以使用main函数启动；</li>
+</ol>
+<h2 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h2><p>在前面，我们实现了一个简单的ls命令。但是在实际使用中还可以做一系列的优化，如果有兴趣，可以继续阅读。否则可以直接跳到和Spring Boot集成的部分。</p>
+<h3 id="Configuration单例化"><a href="#Configuration单例化" class="headerlink" title="Configuration单例化"></a>Configuration单例化</h3><p>Hadoop的配置Configuration一般情况是只需要new一次，适合做成单例。这个在后文会借助Spring实现（也可以自己实现一个单例工厂）。</p>
+<h3 id="抽象非业务代码"><a href="#抽象非业务代码" class="headerlink" title="抽象非业务代码"></a>抽象非业务代码</h3><p>在代码实现中，获取文件系统和捕获IO异常很冗余，真正的业务代码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 判断目录是否存在</span><br><span class="line">boolean isExists = fs.exists(new Path(path));</span><br><span class="line">assertTrue(isExists);</span><br><span class="line"></span><br><span class="line">// 列举文件</span><br><span class="line">FileStatus[] listStatus = fs.listStatus(new Path(path));</span><br><span class="line">log.info(&quot;查询结果: &#123;&#125;&quot;, listStatus);</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以定义一个方法，将非业务代码抽取出来，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private &lt;T&gt; T execute(Callback&lt;T&gt; callback) &#123;</span><br><span class="line">    URI uri = URI.create(nameNode);</span><br><span class="line">    try(</span><br><span class="line">        FileSystem fs = FileSystem.get(uri, configuration)</span><br><span class="line">    )&#123;</span><br><span class="line">        // 利用callback.excute来实现具体的业务代码</span><br><span class="line">        return callback.execute(fs);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        log.error(&quot;Hadoop操作出现异常&quot;, e);</span><br><span class="line">        throw new RuntimeException(&quot;Hadoop操作出现异常&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们使用了一个回调接口callback，将具体的业务代码放入其中。</p>
+<h3 id="定义回调接口（命令模式使用）"><a href="#定义回调接口（命令模式使用）" class="headerlink" title="定义回调接口（命令模式使用）"></a>定义回调接口（命令模式使用）</h3><p>回调接口如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.fs.FileSystem;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface Callback&lt;T&gt; &#123;</span><br><span class="line">   /**</span><br><span class="line">    * 执行</span><br><span class="line">    * @param fs hadoop文件系统</span><br><span class="line">    * @return 操作后的结果</span><br><span class="line">    * @throws IOException 操作文件系统出现异常</span><br><span class="line">    */</span><br><span class="line">   T execute(FileSystem fs) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>回调接口只有一个方法。</p>
+<h3 id="利用回调接口实现具体的逻辑"><a href="#利用回调接口实现具体的逻辑" class="headerlink" title="利用回调接口实现具体的逻辑"></a>利用回调接口实现具体的逻辑</h3><p>在这一步,我们将会利用上述定义的回调接口，来执行具体的业务代码。依旧以<code>ls</code>命令为例，现在我们可以直接写成下面的样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;FileStatus&gt; ls(String path, PathFilter filler) &#123;</span><br><span class="line">    return execute(new Callback&lt;List&lt;FileStatus&gt;&gt;() &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public List&lt;FileStatus&gt; execute(FileSystem fs) throws IOException &#123;</span><br><span class="line">            // 目录不存在</span><br><span class="line">            if (!checkExists(path)) &#123;</span><br><span class="line">                return Collections.emptyList();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            FileStatus[] fileStatuses;</span><br><span class="line">            if (filler != null) &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path), filler);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return Arrays.asList(fileStatuses);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可能，现在看上去并没有多优雅，甚至更加冗余了。但是这部分代码可以转换为Lambda表达式的方式，就会变成下面这个样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;FileStatus&gt; ls(String path, PathFilter filler) &#123;</span><br><span class="line">    return execute((fs) -&gt; &#123;</span><br><span class="line">        // 目录不存在</span><br><span class="line">        if (!checkExists(path)) &#123;</span><br><span class="line">            return Collections.emptyList();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        FileStatus[] fileStatuses ;</span><br><span class="line">        if (filler != null) &#123;</span><br><span class="line">            fileStatuses = fs.listStatus(new Path(path), filler);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            fileStatuses = fs.listStatus(new Path(path));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return Arrays.asList(fileStatuses);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类似的，我们可以实现一个rm命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public boolean rm(String path) &#123;</span><br><span class="line">     return execute(fs -&gt; &#123;</span><br><span class="line">        // 是否递归删除</span><br><span class="line">        boolean recursive = true;</span><br><span class="line">        return fs.delete(new Path(path), recursive);</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里就不需要在反复去初始化Hadoop的文件系统以及捕获IO异常了。</p>
+<h1 id="与Sring-Boot集成"><a href="#与Sring-Boot集成" class="headerlink" title="与Sring Boot集成"></a>与Sring Boot集成</h1><p>前文中，已经实现了简单<code>ls</code>和<code>rm</code>两个命令，并且使用回调的方式，抽取了一些非业务的代码。接下来，我们将前面代码集成到Spring Boot中。</p>
+<h2 id="修改pom-xml"><a href="#修改pom-xml" class="headerlink" title="修改pom.xml"></a>修改pom.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.2.6.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;groupId&gt;io.bobolele&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tutorial&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;tutorial&lt;/name&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- springboot 开始 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;!-- springboot 结束 --&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- hadooop 开始 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">                    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">                    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- hadooop 结束 --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- lomnak 开始 --&gt;</span><br><span class="line">        &lt;!-- lomnak 主要是用于简化开发，不是必须依赖 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- lomnak 结束 --&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+
+<p>依赖主要有三部分：</p>
+<ol>
+<li>Spring Boot依赖（非必需）：使用Spring Boot是为了更好的进行依赖注入、单元测试、日志打印；</li>
+<li>hadoop依赖（<font color="red">必需</font>）：主要包括<code>hadoop-common</code>、<code>hadoop-hdfs</code>、<code>hadoop-client</code>，用来与HDFS进行交互；</li>
+<li>Lombok依赖（非必需）：主要用于简化开发。如我在class中使用<code>@Slf4j</code>, 将会自动注入一个log4j的实例。</li>
+</ol>
+<h2 id="创建Spring-Boot启动类"><a href="#创建Spring-Boot启动类" class="headerlink" title="创建Spring Boot启动类"></a>创建Spring Boot启动类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class HadoopApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(HadoopApplication.class, args);</span><br><span class="line">        log.info(&quot;Hadoop application started.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>HadoopApplication</code>定义了一个主函数，使用该主函数就可以启动Spring Boot项目。</p>
+<h2 id="创建Hadoop配置类"><a href="#创建Hadoop配置类" class="headerlink" title="创建Hadoop配置类"></a>创建Hadoop配置类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.config;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line"></span><br><span class="line">@org.springframework.context.annotation.Configuration</span><br><span class="line">@ConditionalOnProperty(name = &quot;hadoop-node&quot;)</span><br><span class="line">@Slf4j</span><br><span class="line">public class HadoopConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Configuration configuration() &#123;</span><br><span class="line">        System.setProperty(&quot;HADOOP_USER_NAME&quot;, &quot;root&quot;);</span><br><span class="line">        log.info(&quot;初始化Hadoop配置.&quot;);</span><br><span class="line">        // 读取配置文件</span><br><span class="line">        Configuration configuration = new Configuration();</span><br><span class="line">        configuration.set(&quot;dfs.replication&quot;, &quot;1&quot;);</span><br><span class="line">        return configuration;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>HadoopConfig</code>类主要是定义了一个<code>Configuration</code>，这是Hadoop的配置类，理论上一个项目只需要初始化一次。所以这里使用Spring的<code>@Bean</code>装饰，将会定义一个单例的配置实例。在其他类中可以使用<code>@Autowired</code>进行自动依赖注入；</p>
+<h2 id="创建一个回调接口（命令）"><a href="#创建一个回调接口（命令）" class="headerlink" title="创建一个回调接口（命令）"></a>创建一个回调接口（命令）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.fs.FileSystem;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface Callback&lt;T&gt; &#123;</span><br><span class="line">   /**</span><br><span class="line">    * 执行</span><br><span class="line">    * @param fs hadoop文件系统</span><br><span class="line">    * @return 操作后的结果</span><br><span class="line">    * @throws IOException 操作文件系统出现异常</span><br><span class="line">    */</span><br><span class="line">   T execute(FileSystem fs) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="HdfsTemplate实现"><a href="#HdfsTemplate实现" class="headerlink" title="HdfsTemplate实现"></a>HdfsTemplate实现</h2><p>这里实现了部分命令，以供参考</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.*;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.URI;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@ConditionalOnBean(Configuration.class)</span><br><span class="line">@Component</span><br><span class="line">public class HdfsTemplate &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;hadoop.namespace:/&#125;&quot;)</span><br><span class="line">    private String namespace;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;hadoop.name-node&#125;&quot;)</span><br><span class="line">    private String nameNode;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private Configuration configuration;</span><br><span class="line"></span><br><span class="line">    private &lt;T&gt; T execute(Callback&lt;T&gt; callback) &#123;</span><br><span class="line">        URI uri = URI.create(nameNode);</span><br><span class="line">        try (</span><br><span class="line">                FileSystem fs = FileSystem.get(uri, configuration);</span><br><span class="line">        )&#123;</span><br><span class="line">            return callback.execute(fs);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            log.error(&quot;Hadoop操作出现异常&quot;, e);</span><br><span class="line">            throw new RuntimeException(&quot;Hadoop操作出现异常&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 创建目录</span><br><span class="line">     * @param path 目录路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean mkdir(String path) &#123;</span><br><span class="line">        // 目录已经存在</span><br><span class="line">        if (checkExists(path)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            return fs.mkdirs(new Path(path));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 查看文件 */</span><br><span class="line">    public FSDataInputStream text(String path) &#123;</span><br><span class="line">        if (!checkExists(path)) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;想要读取的文件不存在&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            FSDataInputStream inputStream = fs.open(new Path(path));</span><br><span class="line">            return inputStream;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 上传文件到hdfs</span><br><span class="line">     * @param hdfsPath 目标路径</span><br><span class="line">     * @param localPath  本地文件路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean put(String hdfsPath, String localPath) &#123;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            // 是否删除本地文件</span><br><span class="line">            boolean delSrc = false;</span><br><span class="line">            // 是否覆盖目标文件</span><br><span class="line">            boolean overwrite = false;</span><br><span class="line">            fs.copyFromLocalFile(delSrc, overwrite, new Path(localPath), new Path(hdfsPath));</span><br><span class="line">            return true;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 从hdfs下载文件到本地</span><br><span class="line">     * @param hdfsPth hdfs文件路径</span><br><span class="line">     * @param localPath 本地文件路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean get(String hdfsPth, String localPath) &#123;</span><br><span class="line">        if (!checkExists(hdfsPth)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            fs.copyToLocalFile(new Path(hdfsPth), new Path(localPath));</span><br><span class="line">            return true;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 重命名</span><br><span class="line">     * @param source 原文件名</span><br><span class="line">     * @param target 新文件名</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean rename(String source, String target) &#123;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            return fs.rename(new Path(source), new Path(target));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除文件或者目录</span><br><span class="line">     * @param path hdfs路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean rm(String path) &#123;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            // 是否递归删除</span><br><span class="line">            boolean recursive = true;</span><br><span class="line">            return fs.delete(new Path(path), recursive);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取HDFS上面的某个路径下面的所有文件或目录（不包含子目录）信息</span><br><span class="line">     * @param path HDFS的相对目录路径，比如：/testDir</span><br><span class="line">     * @param filler 过滤器</span><br><span class="line">     * @return list</span><br><span class="line">     */</span><br><span class="line">    public List&lt;FileStatus&gt; ls(String path, PathFilter filler) &#123;</span><br><span class="line">        return execute((fs) -&gt; &#123;</span><br><span class="line">            // 目录不存在</span><br><span class="line">            if (!checkExists(path)) &#123;</span><br><span class="line">                return Collections.emptyList();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            FileStatus[] fileStatuses ;</span><br><span class="line">            if (filler != null) &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path), filler);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return Arrays.asList(fileStatuses);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 检查目录是否存在 */</span><br><span class="line">    public boolean checkExists(String path) &#123;</span><br><span class="line">        return execute((fs) -&gt; fs.exists(new Path(path)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置文件添加配置项"><a href="#配置文件添加配置项" class="headerlink" title="配置文件添加配置项"></a>配置文件添加配置项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hadoop-node: hdfs://hadoop1:9001/</span><br><span class="line">hadoop:</span><br><span class="line">  namespace: /</span><br><span class="line">  name-node: hdfs://10.211.55.6:9001/</span><br></pre></td></tr></table></figure>
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="org-apache-hadoop-security-AccessControlException-Permission-denied-user-xxx"><a href="#org-apache-hadoop-security-AccessControlException-Permission-denied-user-xxx" class="headerlink" title="org.apache.hadoop.security.AccessControlException: Permission denied: user=xxx"></a>org.apache.hadoop.security.AccessControlException: Permission denied: user=xxx</h2><p>问题出现原因：<br>因为远程提交Hadoop的任务的情况下如果，没有Hadoop 的系统环境变量，就会读取当前主机的用户名，所以Hadoop集群的节点中没有该用户名的权限，所以出现的异常。<br>解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// xxxx是有hadoop集群节点权限的用户, 如果按照我前文部署的单机Hadoop，就是root</span><br><span class="line">System.setProperty(&quot;HADOOP_USER_NAME&quot;, &quot;xxxx&quot;);</span><br></pre></td></tr></table></figure>
+
+
+            
+          
+      <!-- 
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>HDFS（Hadoop Distributed File System），即Hadoop分布式文件系统，是Hadooop的核心部分之一。 在开发期间，需要将数据提前放到HDFS上，才可以进行分布式计算。<br>Hadoop自带的命令行，提供了一套非常完整的命令接口。不过，我们用到的更多的是在程序中直接访问HDFS。<br>本文将使用Java语言，实现对HDFS的操作。</p>
+<a id="more"></a>
+<p>在阅读本文之前，我希望你具有以下技能：</p>
+<ol>
+<li>熟悉Java语言，若能知道Java8的Lambda表达式将会更好；</li>
+<li>了解Maven；</li>
+<li>了解Spring，若知道Spring Boot将会更好；</li>
+<li>如果了解命令模式就更好了，不了解也没有关系。</li>
+</ol>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="Hadoop环境"><a href="#Hadoop环境" class="headerlink" title="Hadoop环境"></a>Hadoop环境</h2><p>在<a href="https://bobolele.github.io/2020/04/18/CentOS7%E4%B8%8BHadooop3-2-1%E9%83%A8%E7%BD%B2%EF%BC%88%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%89/" target="_blank" rel="noopener">CentOS7下Hadoop3.2.1部署</a>中，介绍了如何部署单机版本的Hadoop。如果没有Hadoop开发环境，需要先部署。</p>
+<ol>
+<li>Linux Centos7</li>
+<li>Java 1.8</li>
+<li>Hadoop 3.2.1</li>
+</ol>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ol>
+<li>win/linux/mac 不限</li>
+<li>Java 1.8</li>
+<li>Maven 3</li>
+<li>idea/eclipse/vs code 不限</li>
+</ol>
+<h1 id="实现ls命令"><a href="#实现ls命令" class="headerlink" title="实现ls命令"></a>实现ls命令</h1><h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>在<code>pom.xml</code>中添加以下依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.FileStatus;</span><br><span class="line">import org.apache.hadoop.fs.FileSystem;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.URI;</span><br><span class="line"></span><br><span class="line">import static org.junit.jupiter.api.Assertions.assertTrue;</span><br><span class="line">import static org.junit.jupiter.api.Assertions.fail;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">public class BaseTests &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void invokeTest() &#123;</span><br><span class="line">        String nameNode = &quot;hdfs://10.211.55.6:9001/&quot;;</span><br><span class="line">        String path = &quot;/input&quot;;</span><br><span class="line"></span><br><span class="line">        // Hadoop配置</span><br><span class="line">        Configuration configuration = new Configuration();</span><br><span class="line"></span><br><span class="line">        URI uri = URI.create(nameNode);</span><br><span class="line"></span><br><span class="line">        try (</span><br><span class="line">                // Hadoop 文件系统</span><br><span class="line">                FileSystem fs = FileSystem.get(uri, configuration);</span><br><span class="line">        ) &#123;</span><br><span class="line">            // 判断目录是否存在</span><br><span class="line">            boolean isExists = fs.exists(new Path(path));</span><br><span class="line">            assertTrue(isExists);</span><br><span class="line"></span><br><span class="line">            // 列举文件</span><br><span class="line">            FileStatus[] listStatus = fs.listStatus(new Path(path));</span><br><span class="line">            log.info(&quot;查询结果: &#123;&#125;&quot;, listStatus);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            fail(&quot;出现了IO异常&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>日志打印如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2020-04-18 20:52:55.667  INFO   --- [           main] i.b.tutorial.hadoop.hdfs.BaseTests       : 查询结果: FileStatus&#123;path=hdfs://10.211.55.6:9001/input/1.txt; isDirectory=false; length=85; replication=1; blocksize=134217728; modification_time=1587033885600; access_time=1587044879940; owner=root; group=supergroup; permission=rw-r--r--; isSymlink=false&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>我在<code>/input</code>目录下放了一些文件夹和文件，所以这里会打印所有的文件和目录。如果该目录下为空，也不会打印任何东西;</li>
+<li>这里使用了junit的单元测试，也可以使用main函数启动；</li>
+</ol>
+<h2 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h2><p>在前面，我们实现了一个简单的ls命令。但是在实际使用中还可以做一系列的优化，如果有兴趣，可以继续阅读。否则可以直接跳到和Spring Boot集成的部分。</p>
+<h3 id="Configuration单例化"><a href="#Configuration单例化" class="headerlink" title="Configuration单例化"></a>Configuration单例化</h3><p>Hadoop的配置Configuration一般情况是只需要new一次，适合做成单例。这个在后文会借助Spring实现（也可以自己实现一个单例工厂）。</p>
+<h3 id="抽象非业务代码"><a href="#抽象非业务代码" class="headerlink" title="抽象非业务代码"></a>抽象非业务代码</h3><p>在代码实现中，获取文件系统和捕获IO异常很冗余，真正的业务代码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 判断目录是否存在</span><br><span class="line">boolean isExists = fs.exists(new Path(path));</span><br><span class="line">assertTrue(isExists);</span><br><span class="line"></span><br><span class="line">// 列举文件</span><br><span class="line">FileStatus[] listStatus = fs.listStatus(new Path(path));</span><br><span class="line">log.info(&quot;查询结果: &#123;&#125;&quot;, listStatus);</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以定义一个方法，将非业务代码抽取出来，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private &lt;T&gt; T execute(Callback&lt;T&gt; callback) &#123;</span><br><span class="line">    URI uri = URI.create(nameNode);</span><br><span class="line">    try(</span><br><span class="line">        FileSystem fs = FileSystem.get(uri, configuration)</span><br><span class="line">    )&#123;</span><br><span class="line">        // 利用callback.excute来实现具体的业务代码</span><br><span class="line">        return callback.execute(fs);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        log.error(&quot;Hadoop操作出现异常&quot;, e);</span><br><span class="line">        throw new RuntimeException(&quot;Hadoop操作出现异常&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们使用了一个回调接口callback，将具体的业务代码放入其中。</p>
+<h3 id="定义回调接口（命令模式使用）"><a href="#定义回调接口（命令模式使用）" class="headerlink" title="定义回调接口（命令模式使用）"></a>定义回调接口（命令模式使用）</h3><p>回调接口如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.fs.FileSystem;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface Callback&lt;T&gt; &#123;</span><br><span class="line">   /**</span><br><span class="line">    * 执行</span><br><span class="line">    * @param fs hadoop文件系统</span><br><span class="line">    * @return 操作后的结果</span><br><span class="line">    * @throws IOException 操作文件系统出现异常</span><br><span class="line">    */</span><br><span class="line">   T execute(FileSystem fs) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>回调接口只有一个方法。</p>
+<h3 id="利用回调接口实现具体的逻辑"><a href="#利用回调接口实现具体的逻辑" class="headerlink" title="利用回调接口实现具体的逻辑"></a>利用回调接口实现具体的逻辑</h3><p>在这一步,我们将会利用上述定义的回调接口，来执行具体的业务代码。依旧以<code>ls</code>命令为例，现在我们可以直接写成下面的样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;FileStatus&gt; ls(String path, PathFilter filler) &#123;</span><br><span class="line">    return execute(new Callback&lt;List&lt;FileStatus&gt;&gt;() &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public List&lt;FileStatus&gt; execute(FileSystem fs) throws IOException &#123;</span><br><span class="line">            // 目录不存在</span><br><span class="line">            if (!checkExists(path)) &#123;</span><br><span class="line">                return Collections.emptyList();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            FileStatus[] fileStatuses;</span><br><span class="line">            if (filler != null) &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path), filler);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return Arrays.asList(fileStatuses);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可能，现在看上去并没有多优雅，甚至更加冗余了。但是这部分代码可以转换为Lambda表达式的方式，就会变成下面这个样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;FileStatus&gt; ls(String path, PathFilter filler) &#123;</span><br><span class="line">    return execute((fs) -&gt; &#123;</span><br><span class="line">        // 目录不存在</span><br><span class="line">        if (!checkExists(path)) &#123;</span><br><span class="line">            return Collections.emptyList();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        FileStatus[] fileStatuses ;</span><br><span class="line">        if (filler != null) &#123;</span><br><span class="line">            fileStatuses = fs.listStatus(new Path(path), filler);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            fileStatuses = fs.listStatus(new Path(path));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return Arrays.asList(fileStatuses);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类似的，我们可以实现一个rm命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public boolean rm(String path) &#123;</span><br><span class="line">     return execute(fs -&gt; &#123;</span><br><span class="line">        // 是否递归删除</span><br><span class="line">        boolean recursive = true;</span><br><span class="line">        return fs.delete(new Path(path), recursive);</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里就不需要在反复去初始化Hadoop的文件系统以及捕获IO异常了。</p>
+<h1 id="与Sring-Boot集成"><a href="#与Sring-Boot集成" class="headerlink" title="与Sring Boot集成"></a>与Sring Boot集成</h1><p>前文中，已经实现了简单<code>ls</code>和<code>rm</code>两个命令，并且使用回调的方式，抽取了一些非业务的代码。接下来，我们将前面代码集成到Spring Boot中。</p>
+<h2 id="修改pom-xml"><a href="#修改pom-xml" class="headerlink" title="修改pom.xml"></a>修改pom.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.2.6.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;groupId&gt;io.bobolele&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tutorial&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;tutorial&lt;/name&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- springboot 开始 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;!-- springboot 结束 --&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- hadooop 开始 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">                    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.1&lt;/version&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">                    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- hadooop 结束 --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- lomnak 开始 --&gt;</span><br><span class="line">        &lt;!-- lomnak 主要是用于简化开发，不是必须依赖 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- lomnak 结束 --&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+
+<p>依赖主要有三部分：</p>
+<ol>
+<li>Spring Boot依赖（非必需）：使用Spring Boot是为了更好的进行依赖注入、单元测试、日志打印；</li>
+<li>hadoop依赖（<font color="red">必需</font>）：主要包括<code>hadoop-common</code>、<code>hadoop-hdfs</code>、<code>hadoop-client</code>，用来与HDFS进行交互；</li>
+<li>Lombok依赖（非必需）：主要用于简化开发。如我在class中使用<code>@Slf4j</code>, 将会自动注入一个log4j的实例。</li>
+</ol>
+<h2 id="创建Spring-Boot启动类"><a href="#创建Spring-Boot启动类" class="headerlink" title="创建Spring Boot启动类"></a>创建Spring Boot启动类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class HadoopApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(HadoopApplication.class, args);</span><br><span class="line">        log.info(&quot;Hadoop application started.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>HadoopApplication</code>定义了一个主函数，使用该主函数就可以启动Spring Boot项目。</p>
+<h2 id="创建Hadoop配置类"><a href="#创建Hadoop配置类" class="headerlink" title="创建Hadoop配置类"></a>创建Hadoop配置类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.config;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line"></span><br><span class="line">@org.springframework.context.annotation.Configuration</span><br><span class="line">@ConditionalOnProperty(name = &quot;hadoop-node&quot;)</span><br><span class="line">@Slf4j</span><br><span class="line">public class HadoopConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Configuration configuration() &#123;</span><br><span class="line">        System.setProperty(&quot;HADOOP_USER_NAME&quot;, &quot;root&quot;);</span><br><span class="line">        log.info(&quot;初始化Hadoop配置.&quot;);</span><br><span class="line">        // 读取配置文件</span><br><span class="line">        Configuration configuration = new Configuration();</span><br><span class="line">        configuration.set(&quot;dfs.replication&quot;, &quot;1&quot;);</span><br><span class="line">        return configuration;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>HadoopConfig</code>类主要是定义了一个<code>Configuration</code>，这是Hadoop的配置类，理论上一个项目只需要初始化一次。所以这里使用Spring的<code>@Bean</code>装饰，将会定义一个单例的配置实例。在其他类中可以使用<code>@Autowired</code>进行自动依赖注入；</p>
+<h2 id="创建一个回调接口（命令）"><a href="#创建一个回调接口（命令）" class="headerlink" title="创建一个回调接口（命令）"></a>创建一个回调接口（命令）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.fs.FileSystem;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface Callback&lt;T&gt; &#123;</span><br><span class="line">   /**</span><br><span class="line">    * 执行</span><br><span class="line">    * @param fs hadoop文件系统</span><br><span class="line">    * @return 操作后的结果</span><br><span class="line">    * @throws IOException 操作文件系统出现异常</span><br><span class="line">    */</span><br><span class="line">   T execute(FileSystem fs) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="HdfsTemplate实现"><a href="#HdfsTemplate实现" class="headerlink" title="HdfsTemplate实现"></a>HdfsTemplate实现</h2><p>这里实现了部分命令，以供参考</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">package io.bobolele.tutorial.hadoop.hdfs;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.*;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.URI;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@ConditionalOnBean(Configuration.class)</span><br><span class="line">@Component</span><br><span class="line">public class HdfsTemplate &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;hadoop.namespace:/&#125;&quot;)</span><br><span class="line">    private String namespace;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;hadoop.name-node&#125;&quot;)</span><br><span class="line">    private String nameNode;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private Configuration configuration;</span><br><span class="line"></span><br><span class="line">    private &lt;T&gt; T execute(Callback&lt;T&gt; callback) &#123;</span><br><span class="line">        URI uri = URI.create(nameNode);</span><br><span class="line">        try (</span><br><span class="line">                FileSystem fs = FileSystem.get(uri, configuration);</span><br><span class="line">        )&#123;</span><br><span class="line">            return callback.execute(fs);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            log.error(&quot;Hadoop操作出现异常&quot;, e);</span><br><span class="line">            throw new RuntimeException(&quot;Hadoop操作出现异常&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 创建目录</span><br><span class="line">     * @param path 目录路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean mkdir(String path) &#123;</span><br><span class="line">        // 目录已经存在</span><br><span class="line">        if (checkExists(path)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            return fs.mkdirs(new Path(path));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 查看文件 */</span><br><span class="line">    public FSDataInputStream text(String path) &#123;</span><br><span class="line">        if (!checkExists(path)) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;想要读取的文件不存在&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            FSDataInputStream inputStream = fs.open(new Path(path));</span><br><span class="line">            return inputStream;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 上传文件到hdfs</span><br><span class="line">     * @param hdfsPath 目标路径</span><br><span class="line">     * @param localPath  本地文件路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean put(String hdfsPath, String localPath) &#123;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            // 是否删除本地文件</span><br><span class="line">            boolean delSrc = false;</span><br><span class="line">            // 是否覆盖目标文件</span><br><span class="line">            boolean overwrite = false;</span><br><span class="line">            fs.copyFromLocalFile(delSrc, overwrite, new Path(localPath), new Path(hdfsPath));</span><br><span class="line">            return true;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 从hdfs下载文件到本地</span><br><span class="line">     * @param hdfsPth hdfs文件路径</span><br><span class="line">     * @param localPath 本地文件路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean get(String hdfsPth, String localPath) &#123;</span><br><span class="line">        if (!checkExists(hdfsPth)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            fs.copyToLocalFile(new Path(hdfsPth), new Path(localPath));</span><br><span class="line">            return true;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 重命名</span><br><span class="line">     * @param source 原文件名</span><br><span class="line">     * @param target 新文件名</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean rename(String source, String target) &#123;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            return fs.rename(new Path(source), new Path(target));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除文件或者目录</span><br><span class="line">     * @param path hdfs路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean rm(String path) &#123;</span><br><span class="line">        return execute(fs -&gt; &#123;</span><br><span class="line">            // 是否递归删除</span><br><span class="line">            boolean recursive = true;</span><br><span class="line">            return fs.delete(new Path(path), recursive);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取HDFS上面的某个路径下面的所有文件或目录（不包含子目录）信息</span><br><span class="line">     * @param path HDFS的相对目录路径，比如：/testDir</span><br><span class="line">     * @param filler 过滤器</span><br><span class="line">     * @return list</span><br><span class="line">     */</span><br><span class="line">    public List&lt;FileStatus&gt; ls(String path, PathFilter filler) &#123;</span><br><span class="line">        return execute((fs) -&gt; &#123;</span><br><span class="line">            // 目录不存在</span><br><span class="line">            if (!checkExists(path)) &#123;</span><br><span class="line">                return Collections.emptyList();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            FileStatus[] fileStatuses ;</span><br><span class="line">            if (filler != null) &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path), filler);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileStatuses = fs.listStatus(new Path(path));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return Arrays.asList(fileStatuses);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 检查目录是否存在 */</span><br><span class="line">    public boolean checkExists(String path) &#123;</span><br><span class="line">        return execute((fs) -&gt; fs.exists(new Path(path)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置文件添加配置项"><a href="#配置文件添加配置项" class="headerlink" title="配置文件添加配置项"></a>配置文件添加配置项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hadoop-node: hdfs://hadoop1:9001/</span><br><span class="line">hadoop:</span><br><span class="line">  namespace: /</span><br><span class="line">  name-node: hdfs://10.211.55.6:9001/</span><br></pre></td></tr></table></figure>
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="org-apache-hadoop-security-AccessControlException-Permission-denied-user-xxx"><a href="#org-apache-hadoop-security-AccessControlException-Permission-denied-user-xxx" class="headerlink" title="org.apache.hadoop.security.AccessControlException: Permission denied: user=xxx"></a>org.apache.hadoop.security.AccessControlException: Permission denied: user=xxx</h2><p>问题出现原因：<br>因为远程提交Hadoop的任务的情况下如果，没有Hadoop 的系统环境变量，就会读取当前主机的用户名，所以Hadoop集群的节点中没有该用户名的权限，所以出现的异常。<br>解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// xxxx是有hadoop集群节点权限的用户, 如果按照我前文部署的单机Hadoop，就是root</span><br><span class="line">System.setProperty(&quot;HADOOP_USER_NAME&quot;, &quot;xxxx&quot;);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+       -->
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/25/java比较时间/" class="archive-article-date">
-  	<time datetime="2019-10-25T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/25/java比较时间/">java8比较时间</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HDFS</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/24/oracle定时任务/" class="archive-article-date">
-  	<time datetime="2019-10-24T13:34:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/24/oracle定时任务/">oracle定时任务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">oracle</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/23/groovy入门1-使用freemarker/" class="archive-article-date">
-  	<time datetime="2019-10-23T11:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/23/groovy入门1-使用freemarker/">groovy入门1:使用freemarker</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">freemarker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">groovy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/vue-router传递参数的几种方式/" class="archive-article-date">
-  	<time datetime="2019-10-20T13:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/vue-router传递参数的几种方式/">vue-router传递参数的几种方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/18/java并发之AQS/" class="archive-article-date">
-  	<time datetime="2019-10-18T15:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/18/java并发之AQS/">java并发之AQS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/16/mybatis缓存机制/" class="archive-article-date">
-  	<time datetime="2019-10-16T12:46:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/16/mybatis缓存机制/">mybatis缓存机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/15/hexo-博客搭建/" class="archive-article-date">
-  	<time datetime="2019-10-15T12:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/15/hexo-博客搭建/">hexo 博客搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/blog//" class="article-tag-list-link color5">blog</a>
+        			<a href="/categories/hadoop//" class="article-tag-list-link color2">hadoop</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/18/Java编程调用HDFS/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/18/CentOS7下Hadooop3-2-1部署（单机模式）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CentOS7下Hadoop3.2.1部署（单机模式）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -483,8 +489,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
