@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: groovy | boboelele</title>
+  <title>Mac使用Python每天下载Bing壁纸 | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="boboelele">
-<meta property="og:url" content="http://yoursite.com/tags/groovy/index.html">
+  <meta name="description" content="前言前段时间下载新版的Edge浏览器，发现Bing的每日壁纸非常好看，于是就想让我的电脑桌面每日显示Bing壁纸。但是找不到轻量又好用的现成软件，于是曲线救国，实现了一个Python脚本，用来下载壁纸。同时使用launchctl定时执行，实现每日替换壁纸的目的。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac使用Python每天下载Bing壁纸">
+<meta property="og:url" content="http://yoursite.com/2020/04/25/Mac使用Python每天下载Bing壁纸/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="描述">
+<meta property="og:description" content="前言前段时间下载新版的Edge浏览器，发现Bing的每日壁纸非常好看，于是就想让我的电脑桌面每日显示Bing壁纸。但是找不到轻量又好用的现成软件，于是曲线救国，实现了一个Python脚本，用来下载壁纸。同时使用launchctl定时执行，实现每日替换壁纸的目的。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-25T08:56:19.347Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="boboelele">
-<meta name="twitter:description" content="描述">
+<meta name="twitter:title" content="Mac使用Python每天下载Bing壁纸">
+<meta name="twitter:description" content="前言前段时间下载新版的Edge浏览器，发现Bing的每日壁纸非常好看，于是就想让我的电脑桌面每日显示Bing壁纸。但是找不到轻量又好用的现成软件，于是曲线救国，实现了一个Python脚本，用来下载壁纸。同时使用launchctl定时执行，实现每日替换壁纸的目的。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,64 +149,194 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Mac使用Python每天下载Bing壁纸" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/23/groovy入门1-使用freemarker/" class="archive-article-date">
-  	<time datetime="2019-10-23T11:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/23/groovy入门1-使用freemarker/">groovy入门1:使用freemarker</a>
+    <h1 class="article-title" itemprop="name">
+      Mac使用Python每天下载Bing壁纸
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2020/04/25/Mac使用Python每天下载Bing壁纸/" class="archive-article-date">
+  	<time datetime="2020-04-25T08:42:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
           
+            
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间下载新版的Edge浏览器，发现Bing的每日壁纸非常好看，于是就想让我的电脑桌面每日显示Bing壁纸。<br>但是找不到轻量又好用的现成软件，于是曲线救国，实现了一个Python脚本，用来下载壁纸。同时使用launchctl定时执行，实现每日替换壁纸的目的。</p>
+<a id="more"></a>
+
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>实现方式比较简单，因为Bing有接口，可以很方便的获取到壁纸的地址。我们只需要发送一个Http请求，将壁纸下载下来即可（这里使用的是Python ）。</p>
+<h2 id="具体代码实现"><a href="#具体代码实现" class="headerlink" title="具体代码实现"></a>具体代码实现</h2><h3 id="下载图片逻辑"><a href="#下载图片逻辑" class="headerlink" title="下载图片逻辑"></a>下载图片逻辑</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def downloadImage(filename):</span><br><span class="line">    url = &quot;https://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;nc=1586183781119&amp;pid=hp&amp;uhd=1&amp;uhdwidth=2880&amp;uhdheight=1620&quot;</span><br><span class="line"></span><br><span class="line">    conn = requests.get(url)</span><br><span class="line">    res = json.loads(conn.text)</span><br><span class="line"></span><br><span class="line">    picUrl = res[&apos;images&apos;][0][&apos;url&apos;]</span><br><span class="line"></span><br><span class="line">    if picUrl == &apos;&apos;:</span><br><span class="line">        print(&apos;can not fetch image url&apos;)</span><br><span class="line">        sys.exit()</span><br><span class="line"></span><br><span class="line">    print(&apos;downloading image: &apos; + picUrl)</span><br><span class="line"></span><br><span class="line">    img = requests.get(&apos;https://cn.bing.com&apos; + picUrl)</span><br><span class="line">    f = open(filename, &apos;wb&apos;)</span><br><span class="line">    f.write(img.content)</span><br><span class="line">    f.close()</span><br><span class="line">    print(&apos;image downloaded.&apos;)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>调用<code>https://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;nc=1586183781119&amp;pid=hp&amp;uhd=1&amp;uhdwidth=2880&amp;uhdheight=1620</code>, 会返回一个json字符串，获取里面的<code>url</code>参数；</li>
+<li>将第一步获取到到<code>url</code>参数拼接在<code>https://cn.bing.com</code>之后，再次请求，就能返回图片；</li>
+<li>将图片写到本地。</li>
+</ol>
+<h3 id="将下载图片设置为壁纸"><a href="#将下载图片设置为壁纸" class="headerlink" title="将下载图片设置为壁纸"></a>将下载图片设置为壁纸</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def setDesktopPic(filename):</span><br><span class="line">    script = &quot;&quot;&quot;/usr/bin/osascript&lt;&lt;END</span><br><span class="line">tell application &quot;Finder&quot;</span><br><span class="line">set desktop picture to POSIX file &quot;%s&quot;</span><br><span class="line">end tell</span><br><span class="line">END&quot;&quot;&quot;</span><br><span class="line">    subprocess.Popen(script%filename, shell=True)</span><br><span class="line">    print(&apos;Desktop pic has been changed &lt;%s&gt;.&apos;%filename)</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#!/Users/libo/miniconda3/bin/python</span><br><span class="line">import requests</span><br><span class="line">import urllib.parse</span><br><span class="line">import json</span><br><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">import time</span><br><span class="line">import subprocess</span><br><span class="line"></span><br><span class="line">def downloadImage(filename):</span><br><span class="line">    url = &quot;https://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;nc=1586183781119&amp;pid=hp&amp;uhd=1&amp;uhdwidth=2880&amp;uhdheight=1620&quot;</span><br><span class="line"></span><br><span class="line">    conn = requests.get(url)</span><br><span class="line">    res = json.loads(conn.text)</span><br><span class="line"></span><br><span class="line">    picUrl = res[&apos;images&apos;][0][&apos;url&apos;]</span><br><span class="line"></span><br><span class="line">    if picUrl == &apos;&apos;:</span><br><span class="line">        print(&apos;can not fetch image url&apos;)</span><br><span class="line">        sys.exit()</span><br><span class="line"></span><br><span class="line">    print(&apos;downloading image: &apos; + picUrl)</span><br><span class="line"></span><br><span class="line">    img = requests.get(&apos;https://cn.bing.com&apos; + picUrl)</span><br><span class="line">    f = open(filename, &apos;wb&apos;)</span><br><span class="line">    f.write(img.content)</span><br><span class="line">    f.close()</span><br><span class="line">    print(&apos;image downloaded.&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def setDesktopPic(filename):</span><br><span class="line">    script = &quot;&quot;&quot;/usr/bin/osascript&lt;&lt;END</span><br><span class="line">tell application &quot;Finder&quot;</span><br><span class="line">set desktop picture to POSIX file &quot;%s&quot;</span><br><span class="line">end tell</span><br><span class="line">END&quot;&quot;&quot;</span><br><span class="line">    subprocess.Popen(script%filename, shell=True)</span><br><span class="line">    print(&apos;Desktop pic has been changed &lt;%s&gt;.&apos;%filename)</span><br><span class="line"></span><br><span class="line">filename = time.strftime(&apos;%Y-%m-%d&apos;)</span><br><span class="line">currDir = &quot;/Users/libo/blog/bing&quot; # os.getcwd()</span><br><span class="line">fullFileName = currDir + &apos;/BingImg/&apos; +filename + &apos;.jpg&apos;</span><br><span class="line">print(fullFileName)</span><br><span class="line">if os.path.isfile(fullFileName):</span><br><span class="line">    print(&apos;image has been downloaded.&apos;)</span><br><span class="line">    setDesktopPic(fullFileName)</span><br><span class="line">    sys.exit()</span><br><span class="line">downloadImage(fullFileName)</span><br><span class="line">setDesktopPic(fullFileName)</span><br></pre></td></tr></table></figure>
+
+<p>本就是脚本，图个方便。所以使用了一些硬编码。</p>
+
+            
+          
+      <!-- 
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间下载新版的Edge浏览器，发现Bing的每日壁纸非常好看，于是就想让我的电脑桌面每日显示Bing壁纸。<br>但是找不到轻量又好用的现成软件，于是曲线救国，实现了一个Python脚本，用来下载壁纸。同时使用launchctl定时执行，实现每日替换壁纸的目的。</p>
+<a id="more"></a>
+
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>实现方式比较简单，因为Bing有接口，可以很方便的获取到壁纸的地址。我们只需要发送一个Http请求，将壁纸下载下来即可（这里使用的是Python ）。</p>
+<h2 id="具体代码实现"><a href="#具体代码实现" class="headerlink" title="具体代码实现"></a>具体代码实现</h2><h3 id="下载图片逻辑"><a href="#下载图片逻辑" class="headerlink" title="下载图片逻辑"></a>下载图片逻辑</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def downloadImage(filename):</span><br><span class="line">    url = &quot;https://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;nc=1586183781119&amp;pid=hp&amp;uhd=1&amp;uhdwidth=2880&amp;uhdheight=1620&quot;</span><br><span class="line"></span><br><span class="line">    conn = requests.get(url)</span><br><span class="line">    res = json.loads(conn.text)</span><br><span class="line"></span><br><span class="line">    picUrl = res[&apos;images&apos;][0][&apos;url&apos;]</span><br><span class="line"></span><br><span class="line">    if picUrl == &apos;&apos;:</span><br><span class="line">        print(&apos;can not fetch image url&apos;)</span><br><span class="line">        sys.exit()</span><br><span class="line"></span><br><span class="line">    print(&apos;downloading image: &apos; + picUrl)</span><br><span class="line"></span><br><span class="line">    img = requests.get(&apos;https://cn.bing.com&apos; + picUrl)</span><br><span class="line">    f = open(filename, &apos;wb&apos;)</span><br><span class="line">    f.write(img.content)</span><br><span class="line">    f.close()</span><br><span class="line">    print(&apos;image downloaded.&apos;)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>调用<code>https://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;nc=1586183781119&amp;pid=hp&amp;uhd=1&amp;uhdwidth=2880&amp;uhdheight=1620</code>, 会返回一个json字符串，获取里面的<code>url</code>参数；</li>
+<li>将第一步获取到到<code>url</code>参数拼接在<code>https://cn.bing.com</code>之后，再次请求，就能返回图片；</li>
+<li>将图片写到本地。</li>
+</ol>
+<h3 id="将下载图片设置为壁纸"><a href="#将下载图片设置为壁纸" class="headerlink" title="将下载图片设置为壁纸"></a>将下载图片设置为壁纸</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def setDesktopPic(filename):</span><br><span class="line">    script = &quot;&quot;&quot;/usr/bin/osascript&lt;&lt;END</span><br><span class="line">tell application &quot;Finder&quot;</span><br><span class="line">set desktop picture to POSIX file &quot;%s&quot;</span><br><span class="line">end tell</span><br><span class="line">END&quot;&quot;&quot;</span><br><span class="line">    subprocess.Popen(script%filename, shell=True)</span><br><span class="line">    print(&apos;Desktop pic has been changed &lt;%s&gt;.&apos;%filename)</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#!/Users/libo/miniconda3/bin/python</span><br><span class="line">import requests</span><br><span class="line">import urllib.parse</span><br><span class="line">import json</span><br><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">import time</span><br><span class="line">import subprocess</span><br><span class="line"></span><br><span class="line">def downloadImage(filename):</span><br><span class="line">    url = &quot;https://cn.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;nc=1586183781119&amp;pid=hp&amp;uhd=1&amp;uhdwidth=2880&amp;uhdheight=1620&quot;</span><br><span class="line"></span><br><span class="line">    conn = requests.get(url)</span><br><span class="line">    res = json.loads(conn.text)</span><br><span class="line"></span><br><span class="line">    picUrl = res[&apos;images&apos;][0][&apos;url&apos;]</span><br><span class="line"></span><br><span class="line">    if picUrl == &apos;&apos;:</span><br><span class="line">        print(&apos;can not fetch image url&apos;)</span><br><span class="line">        sys.exit()</span><br><span class="line"></span><br><span class="line">    print(&apos;downloading image: &apos; + picUrl)</span><br><span class="line"></span><br><span class="line">    img = requests.get(&apos;https://cn.bing.com&apos; + picUrl)</span><br><span class="line">    f = open(filename, &apos;wb&apos;)</span><br><span class="line">    f.write(img.content)</span><br><span class="line">    f.close()</span><br><span class="line">    print(&apos;image downloaded.&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def setDesktopPic(filename):</span><br><span class="line">    script = &quot;&quot;&quot;/usr/bin/osascript&lt;&lt;END</span><br><span class="line">tell application &quot;Finder&quot;</span><br><span class="line">set desktop picture to POSIX file &quot;%s&quot;</span><br><span class="line">end tell</span><br><span class="line">END&quot;&quot;&quot;</span><br><span class="line">    subprocess.Popen(script%filename, shell=True)</span><br><span class="line">    print(&apos;Desktop pic has been changed &lt;%s&gt;.&apos;%filename)</span><br><span class="line"></span><br><span class="line">filename = time.strftime(&apos;%Y-%m-%d&apos;)</span><br><span class="line">currDir = &quot;/Users/libo/blog/bing&quot; # os.getcwd()</span><br><span class="line">fullFileName = currDir + &apos;/BingImg/&apos; +filename + &apos;.jpg&apos;</span><br><span class="line">print(fullFileName)</span><br><span class="line">if os.path.isfile(fullFileName):</span><br><span class="line">    print(&apos;image has been downloaded.&apos;)</span><br><span class="line">    setDesktopPic(fullFileName)</span><br><span class="line">    sys.exit()</span><br><span class="line">downloadImage(fullFileName)</span><br><span class="line">setDesktopPic(fullFileName)</span><br></pre></td></tr></table></figure>
+
+<p>本就是脚本，图个方便。所以使用了一些硬编码。</p>
+
+      
+
+       -->
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">freemarker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">groovy</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/OSX并不好用//" class="article-tag-list-link color3">OSX并不好用</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/25/Mac使用Python每天下载Bing壁纸/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/20/Linux三剑客之awk/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux三剑客之awk</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -228,9 +359,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
