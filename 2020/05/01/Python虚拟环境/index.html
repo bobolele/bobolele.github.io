@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>groovy入门1:使用freemarker | boboelele</title>
+  <title>Python虚拟环境 | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="groovy入门1:使用freemarker前言这是一个自己学习过程的的记录，相当于笔记。所以不会详细介绍freemarker和groovy.这里只来一个一句话简介：freemarker是一款模板引擎：一种基于模板和数据模型，用来生成输出文本（如html、电子邮件、配置文件、源代码等）。groovy是一门基于JVM的敏捷开发语言：其最大的特点是能够与java很好地结合，但是相比java语言，其更加">
-<meta name="keywords" content="freemarker,groovy">
+  <meta name="description" content="前言在Python开发过程中，随着Python项目越来越多，不同的项目，所依赖的Python库版本不一样，而且同一个Python库的不同版本可能不兼容。虚拟环境可以为每一个项目安装独立的 Python 库，这样就可以隔离不同项目之间的 Python 库，也可以隔离项目与操作系统之间的 Python 库。Python3内置了用于创建虚拟环境的venv模块。如果是使用的Python2，需要先安装vir">
+<meta name="keywords" content="虚拟环境,Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="groovy入门1:使用freemarker">
-<meta property="og:url" content="http://yoursite.com/2019/10/23/groovy入门1-使用freemarker/index.html">
+<meta property="og:title" content="Python虚拟环境">
+<meta property="og:url" content="http://yoursite.com/2020/05/01/Python虚拟环境/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="groovy入门1:使用freemarker前言这是一个自己学习过程的的记录，相当于笔记。所以不会详细介绍freemarker和groovy.这里只来一个一句话简介：freemarker是一款模板引擎：一种基于模板和数据模型，用来生成输出文本（如html、电子邮件、配置文件、源代码等）。groovy是一门基于JVM的敏捷开发语言：其最大的特点是能够与java很好地结合，但是相比java语言，其更加">
+<meta property="og:description" content="前言在Python开发过程中，随着Python项目越来越多，不同的项目，所依赖的Python库版本不一样，而且同一个Python库的不同版本可能不兼容。虚拟环境可以为每一个项目安装独立的 Python 库，这样就可以隔离不同项目之间的 Python 库，也可以隔离项目与操作系统之间的 Python 库。Python3内置了用于创建虚拟环境的venv模块。如果是使用的Python2，需要先安装vir">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-23T12:01:19.408Z">
+<meta property="og:updated_time" content="2020-05-01T13:32:55.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="groovy入门1:使用freemarker">
-<meta name="twitter:description" content="groovy入门1:使用freemarker前言这是一个自己学习过程的的记录，相当于笔记。所以不会详细介绍freemarker和groovy.这里只来一个一句话简介：freemarker是一款模板引擎：一种基于模板和数据模型，用来生成输出文本（如html、电子邮件、配置文件、源代码等）。groovy是一门基于JVM的敏捷开发语言：其最大的特点是能够与java很好地结合，但是相比java语言，其更加">
+<meta name="twitter:title" content="Python虚拟环境">
+<meta name="twitter:description" content="前言在Python开发过程中，随着Python项目越来越多，不同的项目，所依赖的Python库版本不一样，而且同一个Python库的不同版本可能不兼容。虚拟环境可以为每一个项目安装独立的 Python 库，这样就可以隔离不同项目之间的 Python 库，也可以隔离项目与操作系统之间的 Python 库。Python3内置了用于创建虚拟环境的venv模块。如果是使用的Python2，需要先安装vir">
   
   
     <link rel="icon" href="/favicon.png">
@@ -149,20 +149,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-groovy入门1-使用freemarker" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Python虚拟环境" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      groovy入门1:使用freemarker
+      Python虚拟环境
     </h1>
   
 
         
-        <a href="/2019/10/23/groovy入门1-使用freemarker/" class="archive-article-date">
-  	<time datetime="2019-10-23T11:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+        <a href="/2020/05/01/Python虚拟环境/" class="archive-article-date">
+  	<time datetime="2020-05-01T13:20:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
 </a>
         
       </header>
@@ -171,30 +171,30 @@
         
           
             
-              <h1 id="groovy入门1-使用freemarker"><a href="#groovy入门1-使用freemarker" class="headerlink" title="groovy入门1:使用freemarker"></a>groovy入门1:使用freemarker</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是一个自己学习过程的的记录，相当于笔记。所以不会详细介绍freemarker和groovy.这里只来一个一句话简介：<br>freemarker是一款模板引擎：一种基于模板和数据模型，用来生成输出文本（如html、电子邮件、配置文件、源代码等）。<br>groovy是一门基于JVM的敏捷开发语言：其最大的特点是能够与java很好地结合，但是相比java语言，其更加的简洁。常常作为java的一种DSL语言。</p>
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在Python开发过程中，随着Python项目越来越多，不同的项目，所依赖的Python库版本不一样，而且同一个Python库的不同版本可能不兼容。<br>虚拟环境可以为每一个项目安装独立的 Python 库，这样就可以隔离不同项目之间的 Python 库，也可以隔离项目与操作系统之间的 Python 库。<br>Python3内置了用于创建虚拟环境的venv模块。如果是使用的Python2，需要先安装virtualenv。<br>通常情况下，建议在开发环境和生产环境下都使用虚拟环境来管理项目的依赖。</p>
 <a id="more"></a>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>作为笔记，这段话是多余的。但是就怕万一有人看到这里了；<br>了解了groovy的基础语法之后，代码理解问题应该不大。如果不知道groovy基础语法的小伙伴，可以初略看一遍，看不懂就先去了解一下groovy的语法；<br>假如你是想学习freemarker，更好是去看freemarker的官网。作为入门，我觉得官网的实例讲的非常的，非常的，非常的清晰简洁。</p>
-<h3 id="模板文件"><a href="#模板文件" class="headerlink" title="模板文件"></a>模板文件</h3><p>test.ftl</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome $&#123;user&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Our latest product:</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123;latestProduct.url&#125;"</span>&gt;</span>$&#123;latestProduct.name&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span>!</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="groovy代码"><a href="#groovy代码" class="headerlink" title="groovy代码"></a>groovy代码</h3><p>FreemarkerDemo.groovy </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 freemarker 依赖</span></span><br><span class="line"><span class="meta">@Grab</span>(<span class="string">'org.freemarker:freemarker:2.3.29'</span>)</span><br><span class="line"><span class="comment">// 这里使用了别名</span></span><br><span class="line"><span class="keyword">import</span> freemarker.template.Configuration as tconf</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建 configuration 实例。实际生产中，应该使用应用层面上的单例。</span></span><br><span class="line"><span class="comment">// 主要出于两点考虑：1. 开销大；2. 不使用单例，会丢失缓存。</span></span><br><span class="line">cfg = <span class="keyword">new</span> tconf(tconf.VERSION_2_3_22)</span><br><span class="line">cfg.setDirectoryForTemplateLoading(<span class="string">'./'</span> as File)</span><br><span class="line">cfg.defaultEncoding = <span class="string">'UTF-8'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 加载模板</span></span><br><span class="line">temp = cfg.getTemplate(<span class="string">'test.ftl'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里可以打印模板的原始数据</span></span><br><span class="line"><span class="comment">//println temp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 创建数据模型</span></span><br><span class="line">dm = [</span><br><span class="line">    <span class="string">'user'</span>:<span class="string">'Big Jor'</span>, </span><br><span class="line">    <span class="string">'latestProduct'</span>:[</span><br><span class="line">        <span class="string">'url'</span>: <span class="string">'/hello/world'</span>,</span><br><span class="line">        <span class="string">'name'</span>:<span class="string">'joe'</span></span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 绑定数据模型和模板，使用 FileWriter 生成文件。</span></span><br><span class="line">temp.process(dm,<span class="keyword">new</span> FileWriter(<span class="string">'./test.html'</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir myproject</span><br><span class="line">$ cd myproject</span><br><span class="line">$ python3 -m venv venv</span><br></pre></td></tr></table></figure>
 
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>没什么好说的，就是一篇笔记。应该不会有人给我发邮件吧。</p>
+<h1 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ . venv/bin/activate</span><br></pre></td></tr></table></figure>
+
+<h1 id="退出虚拟环境"><a href="#退出虚拟环境" class="headerlink" title="退出虚拟环境"></a>退出虚拟环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ deactivate</span><br></pre></td></tr></table></figure>
+
+<h1 id="删除虚拟环境"><a href="#删除虚拟环境" class="headerlink" title="删除虚拟环境"></a>删除虚拟环境</h1><p>直接删除文件夹即可</p>
 
             
           
       <!-- 
-        <h1 id="groovy入门1-使用freemarker"><a href="#groovy入门1-使用freemarker" class="headerlink" title="groovy入门1:使用freemarker"></a>groovy入门1:使用freemarker</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是一个自己学习过程的的记录，相当于笔记。所以不会详细介绍freemarker和groovy.这里只来一个一句话简介：<br>freemarker是一款模板引擎：一种基于模板和数据模型，用来生成输出文本（如html、电子邮件、配置文件、源代码等）。<br>groovy是一门基于JVM的敏捷开发语言：其最大的特点是能够与java很好地结合，但是相比java语言，其更加的简洁。常常作为java的一种DSL语言。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在Python开发过程中，随着Python项目越来越多，不同的项目，所依赖的Python库版本不一样，而且同一个Python库的不同版本可能不兼容。<br>虚拟环境可以为每一个项目安装独立的 Python 库，这样就可以隔离不同项目之间的 Python 库，也可以隔离项目与操作系统之间的 Python 库。<br>Python3内置了用于创建虚拟环境的venv模块。如果是使用的Python2，需要先安装virtualenv。<br>通常情况下，建议在开发环境和生产环境下都使用虚拟环境来管理项目的依赖。</p>
 <a id="more"></a>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>作为笔记，这段话是多余的。但是就怕万一有人看到这里了；<br>了解了groovy的基础语法之后，代码理解问题应该不大。如果不知道groovy基础语法的小伙伴，可以初略看一遍，看不懂就先去了解一下groovy的语法；<br>假如你是想学习freemarker，更好是去看freemarker的官网。作为入门，我觉得官网的实例讲的非常的，非常的，非常的清晰简洁。</p>
-<h3 id="模板文件"><a href="#模板文件" class="headerlink" title="模板文件"></a>模板文件</h3><p>test.ftl</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome $&#123;user&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Our latest product:</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123;latestProduct.url&#125;"</span>&gt;</span>$&#123;latestProduct.name&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span>!</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="groovy代码"><a href="#groovy代码" class="headerlink" title="groovy代码"></a>groovy代码</h3><p>FreemarkerDemo.groovy </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 freemarker 依赖</span></span><br><span class="line"><span class="meta">@Grab</span>(<span class="string">'org.freemarker:freemarker:2.3.29'</span>)</span><br><span class="line"><span class="comment">// 这里使用了别名</span></span><br><span class="line"><span class="keyword">import</span> freemarker.template.Configuration as tconf</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建 configuration 实例。实际生产中，应该使用应用层面上的单例。</span></span><br><span class="line"><span class="comment">// 主要出于两点考虑：1. 开销大；2. 不使用单例，会丢失缓存。</span></span><br><span class="line">cfg = <span class="keyword">new</span> tconf(tconf.VERSION_2_3_22)</span><br><span class="line">cfg.setDirectoryForTemplateLoading(<span class="string">'./'</span> as File)</span><br><span class="line">cfg.defaultEncoding = <span class="string">'UTF-8'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 加载模板</span></span><br><span class="line">temp = cfg.getTemplate(<span class="string">'test.ftl'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里可以打印模板的原始数据</span></span><br><span class="line"><span class="comment">//println temp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 创建数据模型</span></span><br><span class="line">dm = [</span><br><span class="line">    <span class="string">'user'</span>:<span class="string">'Big Jor'</span>, </span><br><span class="line">    <span class="string">'latestProduct'</span>:[</span><br><span class="line">        <span class="string">'url'</span>: <span class="string">'/hello/world'</span>,</span><br><span class="line">        <span class="string">'name'</span>:<span class="string">'joe'</span></span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 绑定数据模型和模板，使用 FileWriter 生成文件。</span></span><br><span class="line">temp.process(dm,<span class="keyword">new</span> FileWriter(<span class="string">'./test.html'</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir myproject</span><br><span class="line">$ cd myproject</span><br><span class="line">$ python3 -m venv venv</span><br></pre></td></tr></table></figure>
 
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>没什么好说的，就是一篇笔记。应该不会有人给我发邮件吧。</p>
+<h1 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ . venv/bin/activate</span><br></pre></td></tr></table></figure>
+
+<h1 id="退出虚拟环境"><a href="#退出虚拟环境" class="headerlink" title="退出虚拟环境"></a>退出虚拟环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ deactivate</span><br></pre></td></tr></table></figure>
+
+<h1 id="删除虚拟环境"><a href="#删除虚拟环境" class="headerlink" title="删除虚拟环境"></a>删除虚拟环境</h1><p>直接删除文件夹即可</p>
 
       
 
@@ -208,17 +208,28 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">freemarker</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">虚拟环境</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">groovy</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -268,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/23/groovy入门1-使用freemarker/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/01/Python虚拟环境/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -282,18 +293,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/24/oracle定时任务/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          oracle定时任务
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/20/vue-router传递参数的几种方式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vue-router传递参数的几种方式</div>
+    <a href="/2020/04/25/Mac使用Python每天下载Bing壁纸/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mac使用Python每天下载Bing壁纸</div>
       <i class="icon-circle-right"></i>
     </a>
   
