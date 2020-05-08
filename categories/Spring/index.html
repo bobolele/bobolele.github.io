@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Linux三剑客之awk | boboelele</title>
+  <title>Category: Spring | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言通常来说，所谓“Linux三剑客”是指awk、grep、sed。 这三者主要的特点是，可以利用正则表达式快速地对文件进行处理。其中，awk擅长取列，grep擅长查找功能，sed擅长取行和替换。本文的重点是awk的入门使用，仅作为科普，不会涉及到awk控制语句、复杂awk脚本编写的内容。">
-<meta name="keywords" content="awk">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux三剑客之awk">
-<meta property="og:url" content="http://yoursite.com/2020/04/20/Linux三剑客之awk/index.html">
+  <meta name="description" content="描述">
+<meta name="keywords" content="关键字">
+<meta property="og:type" content="website">
+<meta property="og:title" content="boboelele">
+<meta property="og:url" content="http://yoursite.com/categories/Spring/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="前言通常来说，所谓“Linux三剑客”是指awk、grep、sed。 这三者主要的特点是，可以利用正则表达式快速地对文件进行处理。其中，awk擅长取列，grep擅长查找功能，sed擅长取行和替换。本文的重点是awk的入门使用，仅作为科普，不会涉及到awk控制语句、复杂awk脚本编写的内容。">
+<meta property="og:description" content="描述">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-20T10:03:54.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux三剑客之awk">
-<meta name="twitter:description" content="前言通常来说，所谓“Linux三剑客”是指awk、grep、sed。 这三者主要的特点是，可以利用正则表达式快速地对文件进行处理。其中，awk擅长取列，grep擅长查找功能，sed擅长取行和替换。本文的重点是awk的入门使用，仅作为科普，不会涉及到awk控制语句、复杂awk脚本编写的内容。">
+<meta name="twitter:title" content="boboelele">
+<meta name="twitter:description" content="描述">
   
   
     <link rel="icon" href="/favicon.png">
@@ -149,293 +148,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Linux三剑客之awk" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Linux三剑客之awk
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/05/08/Spring基于注解实现AOP功能/" class="archive-article-date">
+  	<time datetime="2020-05-08T13:17:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/05/08/Spring基于注解实现AOP功能/">Spring基于注解实现AOP功能</a>
     </h1>
   
 
-        
-        <a href="/2020/04/20/Linux三剑客之awk/" class="archive-article-date">
-  	<time datetime="2020-04-20T08:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-        
+        <div class="article-info info-on-right">
           
-            
-              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通常来说，所谓“Linux三剑客”是指awk、grep、sed。 这三者主要的特点是，可以利用正则表达式快速地对文件进行处理。<br>其中，awk擅长取列，grep擅长查找功能，sed擅长取行和替换。<br>本文的重点是awk的入门使用，仅作为科普，不会涉及到awk控制语句、复杂awk脚本编写的内容。</p>
-<a id="more"></a>
-
-<h1 id="学习准备"><a href="#学习准备" class="headerlink" title="学习准备"></a>学习准备</h1><h2 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h2><p>Ubuntu、Centos、虚拟机都可以。大部分Linux系统都自带awk命令。</p>
-<h2 id="新建测试文件"><a href="#新建测试文件" class="headerlink" title="新建测试文件"></a>新建测试文件</h2><p>新建一个文件，暂时命名为<code>a.md</code>，文件内容如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>同目录下再新建一个文件，暂时命名为<code>b.md</code></p>
-<h1 id="awk的行列概念"><a href="#awk的行列概念" class="headerlink" title="awk的行列概念"></a>awk的行列概念</h1><p>在awk中，每一横行表示为一个<code>record</code>, 将每一横行以分隔符(默认为空格)进行分割，每一纵行表示为<code>field</code>。比如<code>a.md</code>文件里面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>从上往下，分别是5个<code>record</code>。第一个record为<code>nnnnn   3.75    0   java</code>,用空格分割，将会产生四个field。</p>
-<h1 id="正式学习"><a href="#正式学习" class="headerlink" title="正式学习"></a>正式学习</h1><h2 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h2><p>直接在linux命令行输入<code>awk</code>，按回车键，将会输出awk的帮助文档。</p>
-<h2 id="输出完整文档"><a href="#输出完整文档" class="headerlink" title="输出完整文档"></a>输出完整文档</h2><p>执行命令<code>awk &#39;{print}&#39; a.md</code>,就可以输出完整的文件内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print&#125;&apos; a.md</span><br><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>在命令中，具体的操作将会用单引号包裹起来。大括号里面就是具体需要执行的动作。</p>
-<h2 id="输出多个文档"><a href="#输出多个文档" class="headerlink" title="输出多个文档"></a>输出多个文档</h2><p>执行命令<code>awk &#39;{print $0} a.md b.md&#39;</code>,将会同时输出两个文档的内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br><span class="line">gigi	3.75	0	java</span><br><span class="line">kaka	4.00	10	python</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br><span class="line">lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h2 id="显示行数、列数、和文件名"><a href="#显示行数、列数、和文件名" class="headerlink" title="显示行数、列数、和文件名"></a>显示行数、列数、和文件名</h2><p>前文中讲到awk的行列概念，分别是record和field，那么在awk中，以num of record代表行数，简写为NR，同理NF代表列数。<br>而文件名则是FILENAME。#<br>无论NR、NF还是FILENAME，都是awk的内置变量。关于更多内置变量，请参考后文的内置变量说明。</p>
-<p>那么当我们想要打印当前的行数、列数和文件名时，我们只需要执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print FILENAME NR NF $0&#125;&apos; a.md b.md</span><br><span class="line">a.md14nnnnn	3.75	0	java</span><br><span class="line">a.md24kathy	4.00	10	python</span><br><span class="line">a.md35Mark	5.00	20	java js</span><br><span class="line">a.md45Mary	5.50	22	python c++</span><br><span class="line">a.md56Susie	4.25	18 	java python js</span><br><span class="line">b.md64gigi	3.75	0	java</span><br><span class="line">b.md74kaka	4.00	10	python</span><br><span class="line">b.md85vivi	5.00	20	java js</span><br><span class="line">b.md95coco	5.50	22	python c++</span><br><span class="line">b.md106lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h2 id="美化展示"><a href="#美化展示" class="headerlink" title="美化展示"></a>美化展示</h2><h3 id="使用默认输出分割符"><a href="#使用默认输出分割符" class="headerlink" title="使用默认输出分割符"></a>使用默认输出分割符</h3><p>上文我们打印了文件名、行号、列数，但是很明显，所有的字符都是直接拼接在一起。这是因为awk默认，在单引号中间的空格，只是简单的连接作用而已。如果希望对多个元素进行分割，我们需要进行添加分割符号。<br>一般情况下，我们只需要在元素之间添加一个<code>,</code>号，输出的时候就会使用分隔符进行分割（默认是空格）。比如像下面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print FILENAME, NR, NF, $0&#125;&apos; a.md b.md</span><br><span class="line">a.md 1 4 nnnnn	3.75	0	java</span><br><span class="line">a.md 2 4 kathy	4.00	10	python</span><br><span class="line">a.md 3 5 Mark	5.00	20	java js</span><br><span class="line">a.md 4 5 Mary	5.50	22	python c++</span><br><span class="line">a.md 5 6 Susie	4.25	18 	java python js</span><br><span class="line">b.md 6 4 gigi	3.75	0	java</span><br><span class="line">b.md 7 4 kaka	4.00	10	python</span><br><span class="line">b.md 8 5 vivi	5.00	20	java js</span><br><span class="line">b.md 9 5 coco	5.50	22	python c++</span><br><span class="line">b.md 10 6 lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>这个时候，每个元素之间都会用分隔符(默认是空格)进行分割。</p>
-<h3 id="自定义输出分隔符"><a href="#自定义输出分隔符" class="headerlink" title="自定义输出分隔符"></a>自定义输出分隔符</h3><p>在前面我们使用了默认的输出分割符，对输出进行美化。但是结果不是特别好看，因为只有一个空格隔开，显得非常拥挤。<br>所以我们可以使用<code>\t</code>作为分隔符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print FILENAME &quot;\t&quot; NR &quot;\t&quot;NF &quot;\t&quot; $0&#125;&apos; a.md b.md</span><br><span class="line">a.md	1	4	nnnnn	3.75	0	java</span><br><span class="line">a.md	2	4	kathy	4.00	10	python</span><br><span class="line">a.md	3	5	Mark	5.00	20	java js</span><br><span class="line">a.md	4	5	Mary	5.50	22	python c++</span><br><span class="line">a.md	5	6	Susie	4.25	18 	java python js</span><br><span class="line">b.md	6	4	gigi	3.75	0	java</span><br><span class="line">b.md	7	4	kaka	4.00	10	python</span><br><span class="line">b.md	8	5	vivi	5.00	20	java js</span><br><span class="line">b.md	9	5	coco	5.50	22	python c++</span><br><span class="line">b.md	10	6	lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>在此基础上，我们可以将<code>\t</code>修改为默认的分割符，此时将会使用到另一个内建变量<code>OFS</code>，使用方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;OFS=&quot;\t&quot;&#125; &#123;print FILENAME, NR, NF, $0&#125;&apos; a.md b.md</span><br><span class="line">a.md	1	4	nnnnn	3.75	0	java</span><br><span class="line">a.md	2	4	kathy	4.00	10	python</span><br><span class="line">a.md	3	5	Mark	5.00	20	java js</span><br><span class="line">a.md	4	5	Mary	5.50	22	python c++</span><br><span class="line">a.md	5	6	Susie	4.25	18 	java python js</span><br><span class="line">b.md	6	4	gigi	3.75	0	java</span><br><span class="line">b.md	7	4	kaka	4.00	10	python</span><br><span class="line">b.md	8	5	vivi	5.00	20	java js</span><br><span class="line">b.md	9	5	coco	5.50	22	python c++</span><br><span class="line">b.md	10	6	lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出指定列的数据"><a href="#输出指定列的数据" class="headerlink" title="输出指定列的数据"></a>输出指定列的数据</h2><p>前文我们介绍了awk的行列概念，而且我们说过awk擅长处理列，那我们如何输出指定列的数据呢？其实很简单，我们可以很简单地使用<code>$1</code>、<code>$2</code>的形式代替指定的列属性，用<code>\0</code>代表整个record。<br>假如我们想要打印第1列和第4列，使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;OFS=&quot;\t&quot;&#125; &#123;print $1, $4&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	java</span><br><span class="line">kathy	python</span><br><span class="line">Mark	java</span><br><span class="line">Mary	python</span><br><span class="line">Susie	java</span><br><span class="line">gigi	java</span><br><span class="line">kaka	python</span><br><span class="line">vivi	java</span><br><span class="line">coco	python</span><br><span class="line">lala	java</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出倒数的第n列"><a href="#输出倒数的第n列" class="headerlink" title="输出倒数的第n列"></a>输出倒数的第n列</h2><p>每一个record的field的树木不同，输出最后的n列的方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;OFS=&quot;\t&quot;&#125; &#123;print $NF , $(NF - 1)&#125;&apos; a.md b.md</span><br><span class="line">java	0</span><br><span class="line">python	10</span><br><span class="line">js	java</span><br><span class="line">c++	python</span><br><span class="line">js	python</span><br><span class="line">java	0</span><br><span class="line">python	10</span><br><span class="line">js	java</span><br><span class="line">c++	python</span><br><span class="line">js	python</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义输入分隔符"><a href="#自定义输入分隔符" class="headerlink" title="自定义输入分隔符"></a>自定义输入分隔符</h2><p>awk默认是用的空格来分割record来形成多个filed，如果我们想用其他的字符作为分隔符，可以借助内置变量<code>FS</code>实现。比如我们想用<code>.</code>来进行分割，实现如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;FS=&quot;.&quot;&#125; &#123;print $1&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	3</span><br><span class="line">kathy	4</span><br><span class="line">Mark	5</span><br><span class="line">Mary	5</span><br><span class="line">Susie	4</span><br><span class="line">gigi	3</span><br><span class="line">kaka	4</span><br><span class="line">vivi	5</span><br><span class="line">coco	5</span><br><span class="line">lala	4</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据筛选"><a href="#数据筛选" class="headerlink" title="数据筛选"></a>数据筛选</h2><h3 id="比较筛选"><a href="#比较筛选" class="headerlink" title="比较筛选"></a>比较筛选</h3><p>awk可以针对每一个field的值。进行比较来进行数据筛选。<br>比如我们想要筛选出第2列的数字大于4的记录出来，实现如下：　</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;$2 &gt; 3 &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br><span class="line">gigi	3.75	0	java</span><br><span class="line">kaka	4.00	10	python</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br><span class="line">lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>甚至还可以这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;$2 + $3  &gt; 20 &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br><span class="line">lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h3 id="正则筛选"><a href="#正则筛选" class="headerlink" title="正则筛选"></a>正则筛选</h3><p>匹配以M开头的所有记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;/^M/ &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br></pre></td></tr></table></figure>
-
-<p>筛选第二列是以5开头的记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;$2~/^5/ &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br></pre></td></tr></table></figure>
-
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h2><p>program:pattern{action statements;..}<br>pattern部分决定动作语句何时触发及触发事件,如： BEGIN,END<br>action statements对数据进行处理，放在{}内指明,如： print, printf</p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>-F 指明输入时用到的字段分隔符<br>-v var = value，自定义变量</p>
-<h2 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h2><p>FS:输入字段分隔符；OFS：输出字段分隔符；RS：输入记录分隔符；ORS：输出记录分隔符；NF：字段数量；NR:记录号；NFR：各文件分别计数，记录号。FILENAME：当前文件名；ARGC：命令行的参数；ARGV：数组，保存的是命令行所给定的各参数。</p>
-<blockquote>
-<p>注意：以上都是内置变量，在引用时不需要前面加$，每新建一个变量，都需要加个-v,与变量名之间有无空格都可以，变量可以在引用之后再声明，但那一行的输出会输出空行。</p>
-</blockquote>
-
-            
-          
-      <!-- 
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通常来说，所谓“Linux三剑客”是指awk、grep、sed。 这三者主要的特点是，可以利用正则表达式快速地对文件进行处理。<br>其中，awk擅长取列，grep擅长查找功能，sed擅长取行和替换。<br>本文的重点是awk的入门使用，仅作为科普，不会涉及到awk控制语句、复杂awk脚本编写的内容。</p>
-<a id="more"></a>
-
-<h1 id="学习准备"><a href="#学习准备" class="headerlink" title="学习准备"></a>学习准备</h1><h2 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h2><p>Ubuntu、Centos、虚拟机都可以。大部分Linux系统都自带awk命令。</p>
-<h2 id="新建测试文件"><a href="#新建测试文件" class="headerlink" title="新建测试文件"></a>新建测试文件</h2><p>新建一个文件，暂时命名为<code>a.md</code>，文件内容如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>同目录下再新建一个文件，暂时命名为<code>b.md</code></p>
-<h1 id="awk的行列概念"><a href="#awk的行列概念" class="headerlink" title="awk的行列概念"></a>awk的行列概念</h1><p>在awk中，每一横行表示为一个<code>record</code>, 将每一横行以分隔符(默认为空格)进行分割，每一纵行表示为<code>field</code>。比如<code>a.md</code>文件里面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>从上往下，分别是5个<code>record</code>。第一个record为<code>nnnnn   3.75    0   java</code>,用空格分割，将会产生四个field。</p>
-<h1 id="正式学习"><a href="#正式学习" class="headerlink" title="正式学习"></a>正式学习</h1><h2 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h2><p>直接在linux命令行输入<code>awk</code>，按回车键，将会输出awk的帮助文档。</p>
-<h2 id="输出完整文档"><a href="#输出完整文档" class="headerlink" title="输出完整文档"></a>输出完整文档</h2><p>执行命令<code>awk &#39;{print}&#39; a.md</code>,就可以输出完整的文件内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print&#125;&apos; a.md</span><br><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>在命令中，具体的操作将会用单引号包裹起来。大括号里面就是具体需要执行的动作。</p>
-<h2 id="输出多个文档"><a href="#输出多个文档" class="headerlink" title="输出多个文档"></a>输出多个文档</h2><p>执行命令<code>awk &#39;{print $0} a.md b.md&#39;</code>,将会同时输出两个文档的内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br><span class="line">gigi	3.75	0	java</span><br><span class="line">kaka	4.00	10	python</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br><span class="line">lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h2 id="显示行数、列数、和文件名"><a href="#显示行数、列数、和文件名" class="headerlink" title="显示行数、列数、和文件名"></a>显示行数、列数、和文件名</h2><p>前文中讲到awk的行列概念，分别是record和field，那么在awk中，以num of record代表行数，简写为NR，同理NF代表列数。<br>而文件名则是FILENAME。#<br>无论NR、NF还是FILENAME，都是awk的内置变量。关于更多内置变量，请参考后文的内置变量说明。</p>
-<p>那么当我们想要打印当前的行数、列数和文件名时，我们只需要执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print FILENAME NR NF $0&#125;&apos; a.md b.md</span><br><span class="line">a.md14nnnnn	3.75	0	java</span><br><span class="line">a.md24kathy	4.00	10	python</span><br><span class="line">a.md35Mark	5.00	20	java js</span><br><span class="line">a.md45Mary	5.50	22	python c++</span><br><span class="line">a.md56Susie	4.25	18 	java python js</span><br><span class="line">b.md64gigi	3.75	0	java</span><br><span class="line">b.md74kaka	4.00	10	python</span><br><span class="line">b.md85vivi	5.00	20	java js</span><br><span class="line">b.md95coco	5.50	22	python c++</span><br><span class="line">b.md106lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h2 id="美化展示"><a href="#美化展示" class="headerlink" title="美化展示"></a>美化展示</h2><h3 id="使用默认输出分割符"><a href="#使用默认输出分割符" class="headerlink" title="使用默认输出分割符"></a>使用默认输出分割符</h3><p>上文我们打印了文件名、行号、列数，但是很明显，所有的字符都是直接拼接在一起。这是因为awk默认，在单引号中间的空格，只是简单的连接作用而已。如果希望对多个元素进行分割，我们需要进行添加分割符号。<br>一般情况下，我们只需要在元素之间添加一个<code>,</code>号，输出的时候就会使用分隔符进行分割（默认是空格）。比如像下面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print FILENAME, NR, NF, $0&#125;&apos; a.md b.md</span><br><span class="line">a.md 1 4 nnnnn	3.75	0	java</span><br><span class="line">a.md 2 4 kathy	4.00	10	python</span><br><span class="line">a.md 3 5 Mark	5.00	20	java js</span><br><span class="line">a.md 4 5 Mary	5.50	22	python c++</span><br><span class="line">a.md 5 6 Susie	4.25	18 	java python js</span><br><span class="line">b.md 6 4 gigi	3.75	0	java</span><br><span class="line">b.md 7 4 kaka	4.00	10	python</span><br><span class="line">b.md 8 5 vivi	5.00	20	java js</span><br><span class="line">b.md 9 5 coco	5.50	22	python c++</span><br><span class="line">b.md 10 6 lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>这个时候，每个元素之间都会用分隔符(默认是空格)进行分割。</p>
-<h3 id="自定义输出分隔符"><a href="#自定义输出分隔符" class="headerlink" title="自定义输出分隔符"></a>自定义输出分隔符</h3><p>在前面我们使用了默认的输出分割符，对输出进行美化。但是结果不是特别好看，因为只有一个空格隔开，显得非常拥挤。<br>所以我们可以使用<code>\t</code>作为分隔符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;&#123;print FILENAME &quot;\t&quot; NR &quot;\t&quot;NF &quot;\t&quot; $0&#125;&apos; a.md b.md</span><br><span class="line">a.md	1	4	nnnnn	3.75	0	java</span><br><span class="line">a.md	2	4	kathy	4.00	10	python</span><br><span class="line">a.md	3	5	Mark	5.00	20	java js</span><br><span class="line">a.md	4	5	Mary	5.50	22	python c++</span><br><span class="line">a.md	5	6	Susie	4.25	18 	java python js</span><br><span class="line">b.md	6	4	gigi	3.75	0	java</span><br><span class="line">b.md	7	4	kaka	4.00	10	python</span><br><span class="line">b.md	8	5	vivi	5.00	20	java js</span><br><span class="line">b.md	9	5	coco	5.50	22	python c++</span><br><span class="line">b.md	10	6	lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>在此基础上，我们可以将<code>\t</code>修改为默认的分割符，此时将会使用到另一个内建变量<code>OFS</code>，使用方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;OFS=&quot;\t&quot;&#125; &#123;print FILENAME, NR, NF, $0&#125;&apos; a.md b.md</span><br><span class="line">a.md	1	4	nnnnn	3.75	0	java</span><br><span class="line">a.md	2	4	kathy	4.00	10	python</span><br><span class="line">a.md	3	5	Mark	5.00	20	java js</span><br><span class="line">a.md	4	5	Mary	5.50	22	python c++</span><br><span class="line">a.md	5	6	Susie	4.25	18 	java python js</span><br><span class="line">b.md	6	4	gigi	3.75	0	java</span><br><span class="line">b.md	7	4	kaka	4.00	10	python</span><br><span class="line">b.md	8	5	vivi	5.00	20	java js</span><br><span class="line">b.md	9	5	coco	5.50	22	python c++</span><br><span class="line">b.md	10	6	lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出指定列的数据"><a href="#输出指定列的数据" class="headerlink" title="输出指定列的数据"></a>输出指定列的数据</h2><p>前文我们介绍了awk的行列概念，而且我们说过awk擅长处理列，那我们如何输出指定列的数据呢？其实很简单，我们可以很简单地使用<code>$1</code>、<code>$2</code>的形式代替指定的列属性，用<code>\0</code>代表整个record。<br>假如我们想要打印第1列和第4列，使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;OFS=&quot;\t&quot;&#125; &#123;print $1, $4&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	java</span><br><span class="line">kathy	python</span><br><span class="line">Mark	java</span><br><span class="line">Mary	python</span><br><span class="line">Susie	java</span><br><span class="line">gigi	java</span><br><span class="line">kaka	python</span><br><span class="line">vivi	java</span><br><span class="line">coco	python</span><br><span class="line">lala	java</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出倒数的第n列"><a href="#输出倒数的第n列" class="headerlink" title="输出倒数的第n列"></a>输出倒数的第n列</h2><p>每一个record的field的树木不同，输出最后的n列的方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;OFS=&quot;\t&quot;&#125; &#123;print $NF , $(NF - 1)&#125;&apos; a.md b.md</span><br><span class="line">java	0</span><br><span class="line">python	10</span><br><span class="line">js	java</span><br><span class="line">c++	python</span><br><span class="line">js	python</span><br><span class="line">java	0</span><br><span class="line">python	10</span><br><span class="line">js	java</span><br><span class="line">c++	python</span><br><span class="line">js	python</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义输入分隔符"><a href="#自定义输入分隔符" class="headerlink" title="自定义输入分隔符"></a>自定义输入分隔符</h2><p>awk默认是用的空格来分割record来形成多个filed，如果我们想用其他的字符作为分隔符，可以借助内置变量<code>FS</code>实现。比如我们想用<code>.</code>来进行分割，实现如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk  &apos;BEGIN &#123;FS=&quot;.&quot;&#125; &#123;print $1&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	3</span><br><span class="line">kathy	4</span><br><span class="line">Mark	5</span><br><span class="line">Mary	5</span><br><span class="line">Susie	4</span><br><span class="line">gigi	3</span><br><span class="line">kaka	4</span><br><span class="line">vivi	5</span><br><span class="line">coco	5</span><br><span class="line">lala	4</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据筛选"><a href="#数据筛选" class="headerlink" title="数据筛选"></a>数据筛选</h2><h3 id="比较筛选"><a href="#比较筛选" class="headerlink" title="比较筛选"></a>比较筛选</h3><p>awk可以针对每一个field的值。进行比较来进行数据筛选。<br>比如我们想要筛选出第2列的数字大于4的记录出来，实现如下：　</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;$2 &gt; 3 &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">nnnnn	3.75	0	java</span><br><span class="line">kathy	4.00	10	python</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br><span class="line">gigi	3.75	0	java</span><br><span class="line">kaka	4.00	10	python</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br><span class="line">lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<p>甚至还可以这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;$2 + $3  &gt; 20 &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">Susie	4.25	18 	java python js</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br><span class="line">lala	4.25	18 	java python js</span><br></pre></td></tr></table></figure>
-
-<h3 id="正则筛选"><a href="#正则筛选" class="headerlink" title="正则筛选"></a>正则筛选</h3><p>匹配以M开头的所有记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;/^M/ &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br></pre></td></tr></table></figure>
-
-<p>筛选第二列是以5开头的记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 awk]# awk &apos;$2~/^5/ &#123;print $0&#125;&apos; a.md b.md</span><br><span class="line">Mark	5.00	20	java js</span><br><span class="line">Mary	5.50	22	python c++</span><br><span class="line">vivi	5.00	20	java js</span><br><span class="line">coco	5.50	22	python c++</span><br></pre></td></tr></table></figure>
-
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h2><p>program:pattern{action statements;..}<br>pattern部分决定动作语句何时触发及触发事件,如： BEGIN,END<br>action statements对数据进行处理，放在{}内指明,如： print, printf</p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>-F 指明输入时用到的字段分隔符<br>-v var = value，自定义变量</p>
-<h2 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h2><p>FS:输入字段分隔符；OFS：输出字段分隔符；RS：输入记录分隔符；ORS：输出记录分隔符；NF：字段数量；NR:记录号；NFR：各文件分别计数，记录号。FILENAME：当前文件名；ARGC：命令行的参数；ARGV：数组，保存的是命令行所给定的各参数。</p>
-<blockquote>
-<p>注意：以上都是内置变量，在引用时不需要前面加$，每新建一个变量，都需要加个-v,与变量名之间有无空格都可以，变量可以在引用之后再声明，但那一行的输出会输出空行。</p>
-</blockquote>
-
-      
-
-       -->
-    </div>
-    <div class="article-info article-info-index">
-      
-      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">awk</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">AOP</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/20/Linux三剑客之awk/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/04/25/Mac使用Python每天下载Bing壁纸/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mac使用Python每天下载Bing壁纸
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/04/18/Java编程调用HDFS/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java编程调用HDFS</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -458,10 +239,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
