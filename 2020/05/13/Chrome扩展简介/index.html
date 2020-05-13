@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | boboelele</title>
+  <title>Chrome扩展1:简介 | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="boboelele">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="Chrome扩展是一个用Web技术开发，用来增强浏览器功能的软件。它主要是由HTML、CSS、JS和Images等资源组成的一个.crx后缀的压缩包。">
+<meta name="keywords" content="Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chrome扩展1:简介">
+<meta property="og:url" content="http://yoursite.com/2020/05/13/Chrome扩展简介/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="描述">
+<meta property="og:description" content="Chrome扩展是一个用Web技术开发，用来增强浏览器功能的软件。它主要是由HTML、CSS、JS和Images等资源组成的一个.crx后缀的压缩包。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-13T13:00:01.580Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="boboelele">
-<meta name="twitter:description" content="描述">
+<meta name="twitter:title" content="Chrome扩展1:简介">
+<meta name="twitter:description" content="Chrome扩展是一个用Web技术开发，用来增强浏览器功能的软件。它主要是由HTML、CSS、JS和Images等资源组成的一个.crx后缀的压缩包。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,319 +149,262 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-Chrome扩展简介" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chrome扩展1:简介
+    </h1>
+  
+
+        
+        <a href="/2020/05/13/Chrome扩展简介/" class="archive-article-date">
+  	<time datetime="2020-05-13T12:53:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+          
             
-  
-  
-    
-    
+              <p>Chrome扩展是一个用Web技术开发，用来增强浏览器功能的软件。<br>它主要是由HTML、CSS、JS和Images等资源组成的一个.crx后缀的压缩包。</p>
+<a id="more"></a>
+
+<h2 id="学习Chrome扩展有什么意义"><a href="#学习Chrome扩展有什么意义" class="headerlink" title="学习Chrome扩展有什么意义"></a>学习Chrome扩展有什么意义</h2><p>可以用来增强浏览器功能，让浏览器实现自定义的功能需求，让浏览器更符合自己的使用习惯。<br>常见的使用场景如下：</p>
+<ol>
+<li>书签控制；</li>
+<li>下载控制；</li>
+<li>窗口控制；</li>
+<li>标签控制；</li>
+<li>网络请求控制、各类事件控制；</li>
+<li>自定义原生菜单；</li>
+<li>完善的通信机制；</li>
+<li>等等。</li>
+</ol>
+<h2 id="Chrome扩展优点"><a href="#Chrome扩展优点" class="headerlink" title="Chrome扩展优点"></a>Chrome扩展优点</h2><p>目前流行的主要分为三类浏览器：Chrome系、Firefox系以及Safari系。之所以先学习Chrome扩展，理由有以下几个：</p>
+<ol>
+<li>因为目前Chrome占有率更高（尤其是新版的Edge浏览器横空出世之后），开发的Chrome扩展不仅能在Chrome浏览器上使用，还能在360极速浏览器、搜狗浏览器或者Edge浏览器上使用；</li>
+<li>开发简单；</li>
+<li>甚至Firefox浏览器也对Chrome扩展的运行提供了一定的支持。</li>
+</ol>
+<h1 id="Chrome扩展核心介绍"><a href="#Chrome扩展核心介绍" class="headerlink" title="Chrome扩展核心介绍"></a>Chrome扩展核心介绍</h1><h2 id="manifest-json"><a href="#manifest-json" class="headerlink" title="manifest.json"></a>manifest.json</h2><p>这是Chrome扩展必需的文件，主要作用是来管理扩展开发所有的配置信息。<br>其中manifest_version、name和version这3个属性是必不可少的，description和icons是推荐存在的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 清单文件的版本，这个必须写，而且必须是2</span><br><span class="line">	&quot;manifest_version&quot;: 2,</span><br><span class="line">	// 插件的名称</span><br><span class="line">	&quot;name&quot;: &quot;demo&quot;,</span><br><span class="line">	// 插件的版本</span><br><span class="line">	&quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">	// 插件描述</span><br><span class="line">	&quot;description&quot;: &quot;简单的Chrome扩展demo&quot;,</span><br><span class="line">	// 图标，一般偷懒全部用一个尺寸的也没问题</span><br><span class="line">	&quot;icons&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;16&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		&quot;48&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		&quot;128&quot;: &quot;img/icon.png&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	// 会一直常驻的后台JS或后台页面</span><br><span class="line">	&quot;background&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		// 2种指定方式，如果指定JS，那么会自动生成一个背景页</span><br><span class="line">		&quot;page&quot;: &quot;background.html&quot;</span><br><span class="line">		//&quot;scripts&quot;: [&quot;js/background.js&quot;]</span><br><span class="line">	&#125;,</span><br><span class="line">	// 浏览器右上角图标设置，browser_action、page_action、app必须三选一</span><br><span class="line">	&quot;browser_action&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;default_icon&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		// 图标悬停时的标题，可选</span><br><span class="line">		&quot;default_title&quot;: &quot;这是一个示例Chrome插件&quot;,</span><br><span class="line">		&quot;default_popup&quot;: &quot;popup.html&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	// 当某些特定页面打开才显示的图标</span><br><span class="line">	/*&quot;page_action&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;default_icon&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		&quot;default_title&quot;: &quot;我是pageAction&quot;,</span><br><span class="line">		&quot;default_popup&quot;: &quot;popup.html&quot;</span><br><span class="line">	&#125;,*/</span><br><span class="line">	// 需要直接注入页面的JS</span><br><span class="line">	&quot;content_scripts&quot;:</span><br><span class="line">	[</span><br><span class="line">		&#123;</span><br><span class="line">			//&quot;matches&quot;: [&quot;http://*/*&quot;, &quot;https://*/*&quot;],</span><br><span class="line">			// &quot;&lt;all_urls&gt;&quot; 表示匹配所有地址</span><br><span class="line">			&quot;matches&quot;: [&quot;&lt;all_urls&gt;&quot;],</span><br><span class="line">			// 多个JS按顺序注入</span><br><span class="line">			&quot;js&quot;: [&quot;js/jquery-1.8.3.js&quot;, &quot;js/content-script.js&quot;],</span><br><span class="line">			// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式</span><br><span class="line">			&quot;css&quot;: [&quot;css/custom.css&quot;],</span><br><span class="line">			// 代码注入的时间，可选值： &quot;document_start&quot;, &quot;document_end&quot;, or &quot;document_idle&quot;，最后一个表示页面空闲时，默认document_idle</span><br><span class="line">			&quot;run_at&quot;: &quot;document_start&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		// 这里仅仅是为了演示content-script可以配置多个规则</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;matches&quot;: [&quot;*://*/*.png&quot;, &quot;*://*/*.jpg&quot;, &quot;*://*/*.gif&quot;, &quot;*://*/*.bmp&quot;],</span><br><span class="line">			&quot;js&quot;: [&quot;js/show-image-content-size.js&quot;]</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	// 权限申请</span><br><span class="line">	&quot;permissions&quot;:</span><br><span class="line">	[</span><br><span class="line">		&quot;contextMenus&quot;, // 右键菜单</span><br><span class="line">		&quot;tabs&quot;, // 标签</span><br><span class="line">		&quot;notifications&quot;, // 通知</span><br><span class="line">		&quot;webRequest&quot;, // web请求</span><br><span class="line">		&quot;webRequestBlocking&quot;,</span><br><span class="line">		&quot;storage&quot;, // 插件本地存储</span><br><span class="line">		&quot;http://*/*&quot;, // 可以通过executeScript或者insertCSS访问的网站</span><br><span class="line">		&quot;https://*/*&quot; // 可以通过executeScript或者insertCSS访问的网站</span><br><span class="line">	],</span><br><span class="line">	// 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的</span><br><span class="line">	&quot;web_accessible_resources&quot;: [&quot;js/inject.js&quot;],</span><br><span class="line">	// 插件主页，这个很重要，不要浪费了这个免费广告位</span><br><span class="line">	&quot;homepage_url&quot;: &quot;https://www.baidu.com&quot;,</span><br><span class="line">	// 覆盖浏览器默认页面</span><br><span class="line">	&quot;chrome_url_overrides&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		// 覆盖浏览器默认的新标签页</span><br><span class="line">		&quot;newtab&quot;: &quot;newtab.html&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	// Chrome40以前的插件配置页写法</span><br><span class="line">	&quot;options_page&quot;: &quot;options.html&quot;,</span><br><span class="line">	// Chrome40以后的插件配置页写法，如果2个都写，新版Chrome只认后面这一个</span><br><span class="line">	&quot;options_ui&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;page&quot;: &quot;options.html&quot;,</span><br><span class="line">		// 添加一些默认的样式，推荐使用</span><br><span class="line">		&quot;chrome_style&quot;: true</span><br><span class="line">	&#125;,</span><br><span class="line">	// 向地址栏注册一个关键字以提供搜索建议，只能设置一个关键字</span><br><span class="line">	&quot;omnibox&quot;: &#123; &quot;keyword&quot; : &quot;go&quot; &#125;,</span><br><span class="line">	// 默认语言</span><br><span class="line">	&quot;default_locale&quot;: &quot;zh_CN&quot;,</span><br><span class="line">	// devtools页面入口，注意只能指向一个HTML文件，不能是JS文件</span><br><span class="line">	&quot;devtools_page&quot;: &quot;devtools.html&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：点击查看完整的配置文件 <a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="noopener">https://developer.chrome.com/extensions/manifest</a></p>
+<h2 id="Content-scripts"><a href="#Content-scripts" class="headerlink" title="Content-scripts"></a>Content-scripts</h2><p>用来实现向页面注入脚本，可以包括js和css。<br>借助content-scripts，我们可以通过配置的方式向指定页面注入js和css，实现广告屏蔽、页面css定制等功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 需要直接注入页面的JS</span><br><span class="line">	&quot;content_scripts&quot;:</span><br><span class="line">	[</span><br><span class="line">		&#123;</span><br><span class="line">			//&quot;matches&quot;: [&quot;http://*/*&quot;, &quot;https://*/*&quot;],</span><br><span class="line">			// &quot;&lt;all_urls&gt;&quot; 表示匹配所有地址</span><br><span class="line">			&quot;matches&quot;: [&quot;&lt;all_urls&gt;&quot;],</span><br><span class="line">			// 多个JS按顺序注入</span><br><span class="line">			&quot;js&quot;: [&quot;js/jquery-1.8.3.js&quot;, &quot;js/content-script.js&quot;],</span><br><span class="line">			// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式</span><br><span class="line">			&quot;css&quot;: [&quot;css/custom.css&quot;],</span><br><span class="line">			// 代码注入的时间，可选值： &quot;document_start&quot;, &quot;document_end&quot;, or &quot;document_idle&quot;，最后一个表示页面空闲时，默认document_idle</span><br><span class="line">			&quot;run_at&quot;: &quot;document_start&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
+<ol>
+<li>content-scripts和原始页面共享DOM，但是不共享JS。如果要访问的页面的JS（例如某个JS变量），只能通过injected.js来实现。</li>
+<li>Content-scripts不能访问绝大部分chrome.xxx.api，除一下4类：chrome.extension(getURL , inIncognitoContext , lastError , onRequest , sendRequest)、chrome.i18n、chrome.runtime(connect , getManifest , getURL , id , onConnect , onMessage , sendMessage)、chrome.storage。</li>
+<li>通常情况下，content-scripts能够使用的Chrome的API已经够用。如果还需要调用其他的API，可以通过通信的方式让background来协助调用。</li>
+</ol>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Background是一个常驻的页面，它的生命周期是插件中所有类型页面中最长的，随着浏览器打开而打开，浏览器关闭而关闭。所以经常把需要一直运行、启动就运行、全局的代码放在background里面。<br>Background的权限非常高，可以调用几乎全部的Chrome扩展API（除了devtools）以外，并且可以实现无限制跨域。<br>在配置中，background可以通过page指定一张网页，也可以通过scripts直接指定一个JS，Chrome会自动为这个JS生成一个默认的网页。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 会一直常驻的后台JS或后台页面</span><br><span class="line">	&quot;background&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		// 2种指定方式，如果指定JS，那么会自动生成一个背景页</span><br><span class="line">		&quot;page&quot;: &quot;background.html&quot;</span><br><span class="line">		//&quot;scripts&quot;: [&quot;js/background.js&quot;]</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Event-pages"><a href="#Event-pages" class="headerlink" title="Event-pages"></a>Event-pages</h2><p>鉴于background生命周期太长，长时间挂载会影响性能。如果想要实现：在需要加载的时候才被加载（比如第一次安装、更新完成），就可以使用event-pages。<br>它和background之间唯一区别是多了persistent参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;background&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;scripts&quot;: [&quot;event-page.js&quot;],</span><br><span class="line">		&quot;persistent&quot;: false</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="popup"><a href="#popup" class="headerlink" title="popup"></a>popup</h2><p>popup是点击<code>browser_action</code>或者<code>page _action</code>图标时打了的一个小窗口网页，焦点离开网页就立即关闭，一般用来做临时性的交互。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;browser_action&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;default_icon&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		// 图标悬停时的标题，可选</span><br><span class="line">		&quot;default_title&quot;: &quot;这是一个示例Chrome插件&quot;,</span><br><span class="line">		&quot;default_popup&quot;: &quot;popup.html&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：在权限上和background非常类似，最大的区别是生命周期不同。</p>
+<h2 id="Injected-scripts"><a href="#Injected-scripts" class="headerlink" title="Injected-scripts"></a>Injected-scripts</h2><p>前文说到，content-scripts不能访问页面中的JS。<br>Injected-scripts的目的就是通过DOM操作的方式，向页面注入JS。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 向页面注入JS</span><br><span class="line">function injectCustomJs(jsPath)</span><br><span class="line">&#123;</span><br><span class="line">	jsPath = jsPath || &apos;js/inject.js&apos;;</span><br><span class="line">	var temp = document.createElement(&apos;script&apos;);</span><br><span class="line">	temp.setAttribute(&apos;type&apos;, &apos;text/javascript&apos;);</span><br><span class="line">	// 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js</span><br><span class="line">	temp.src = chrome.extension.getURL(jsPath);</span><br><span class="line">	temp.onload = function()</span><br><span class="line">	&#123;</span><br><span class="line">		// 放在页面不好看，执行完后移除掉</span><br><span class="line">		this.parentNode.removeChild(this);</span><br><span class="line">	&#125;;</span><br><span class="line">	document.head.appendChild(temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：想要在web中直接访问扩展中的资源，必须要显式声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的</span><br><span class="line">	&quot;web_accessible_resources&quot;: [&quot;js/inject.js&quot;],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Homepage-url"><a href="#Homepage-url" class="headerlink" title="Homepage_url"></a>Homepage_url</h2><p>开发者或者扩展主页设置。</p>
+
+            
+          
+      <!-- 
+        <p>Chrome扩展是一个用Web技术开发，用来增强浏览器功能的软件。<br>它主要是由HTML、CSS、JS和Images等资源组成的一个.crx后缀的压缩包。</p>
+<a id="more"></a>
+
+<h2 id="学习Chrome扩展有什么意义"><a href="#学习Chrome扩展有什么意义" class="headerlink" title="学习Chrome扩展有什么意义"></a>学习Chrome扩展有什么意义</h2><p>可以用来增强浏览器功能，让浏览器实现自定义的功能需求，让浏览器更符合自己的使用习惯。<br>常见的使用场景如下：</p>
+<ol>
+<li>书签控制；</li>
+<li>下载控制；</li>
+<li>窗口控制；</li>
+<li>标签控制；</li>
+<li>网络请求控制、各类事件控制；</li>
+<li>自定义原生菜单；</li>
+<li>完善的通信机制；</li>
+<li>等等。</li>
+</ol>
+<h2 id="Chrome扩展优点"><a href="#Chrome扩展优点" class="headerlink" title="Chrome扩展优点"></a>Chrome扩展优点</h2><p>目前流行的主要分为三类浏览器：Chrome系、Firefox系以及Safari系。之所以先学习Chrome扩展，理由有以下几个：</p>
+<ol>
+<li>因为目前Chrome占有率更高（尤其是新版的Edge浏览器横空出世之后），开发的Chrome扩展不仅能在Chrome浏览器上使用，还能在360极速浏览器、搜狗浏览器或者Edge浏览器上使用；</li>
+<li>开发简单；</li>
+<li>甚至Firefox浏览器也对Chrome扩展的运行提供了一定的支持。</li>
+</ol>
+<h1 id="Chrome扩展核心介绍"><a href="#Chrome扩展核心介绍" class="headerlink" title="Chrome扩展核心介绍"></a>Chrome扩展核心介绍</h1><h2 id="manifest-json"><a href="#manifest-json" class="headerlink" title="manifest.json"></a>manifest.json</h2><p>这是Chrome扩展必需的文件，主要作用是来管理扩展开发所有的配置信息。<br>其中manifest_version、name和version这3个属性是必不可少的，description和icons是推荐存在的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 清单文件的版本，这个必须写，而且必须是2</span><br><span class="line">	&quot;manifest_version&quot;: 2,</span><br><span class="line">	// 插件的名称</span><br><span class="line">	&quot;name&quot;: &quot;demo&quot;,</span><br><span class="line">	// 插件的版本</span><br><span class="line">	&quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">	// 插件描述</span><br><span class="line">	&quot;description&quot;: &quot;简单的Chrome扩展demo&quot;,</span><br><span class="line">	// 图标，一般偷懒全部用一个尺寸的也没问题</span><br><span class="line">	&quot;icons&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;16&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		&quot;48&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		&quot;128&quot;: &quot;img/icon.png&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	// 会一直常驻的后台JS或后台页面</span><br><span class="line">	&quot;background&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		// 2种指定方式，如果指定JS，那么会自动生成一个背景页</span><br><span class="line">		&quot;page&quot;: &quot;background.html&quot;</span><br><span class="line">		//&quot;scripts&quot;: [&quot;js/background.js&quot;]</span><br><span class="line">	&#125;,</span><br><span class="line">	// 浏览器右上角图标设置，browser_action、page_action、app必须三选一</span><br><span class="line">	&quot;browser_action&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;default_icon&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		// 图标悬停时的标题，可选</span><br><span class="line">		&quot;default_title&quot;: &quot;这是一个示例Chrome插件&quot;,</span><br><span class="line">		&quot;default_popup&quot;: &quot;popup.html&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	// 当某些特定页面打开才显示的图标</span><br><span class="line">	/*&quot;page_action&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;default_icon&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		&quot;default_title&quot;: &quot;我是pageAction&quot;,</span><br><span class="line">		&quot;default_popup&quot;: &quot;popup.html&quot;</span><br><span class="line">	&#125;,*/</span><br><span class="line">	// 需要直接注入页面的JS</span><br><span class="line">	&quot;content_scripts&quot;:</span><br><span class="line">	[</span><br><span class="line">		&#123;</span><br><span class="line">			//&quot;matches&quot;: [&quot;http://*/*&quot;, &quot;https://*/*&quot;],</span><br><span class="line">			// &quot;&lt;all_urls&gt;&quot; 表示匹配所有地址</span><br><span class="line">			&quot;matches&quot;: [&quot;&lt;all_urls&gt;&quot;],</span><br><span class="line">			// 多个JS按顺序注入</span><br><span class="line">			&quot;js&quot;: [&quot;js/jquery-1.8.3.js&quot;, &quot;js/content-script.js&quot;],</span><br><span class="line">			// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式</span><br><span class="line">			&quot;css&quot;: [&quot;css/custom.css&quot;],</span><br><span class="line">			// 代码注入的时间，可选值： &quot;document_start&quot;, &quot;document_end&quot;, or &quot;document_idle&quot;，最后一个表示页面空闲时，默认document_idle</span><br><span class="line">			&quot;run_at&quot;: &quot;document_start&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		// 这里仅仅是为了演示content-script可以配置多个规则</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;matches&quot;: [&quot;*://*/*.png&quot;, &quot;*://*/*.jpg&quot;, &quot;*://*/*.gif&quot;, &quot;*://*/*.bmp&quot;],</span><br><span class="line">			&quot;js&quot;: [&quot;js/show-image-content-size.js&quot;]</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	// 权限申请</span><br><span class="line">	&quot;permissions&quot;:</span><br><span class="line">	[</span><br><span class="line">		&quot;contextMenus&quot;, // 右键菜单</span><br><span class="line">		&quot;tabs&quot;, // 标签</span><br><span class="line">		&quot;notifications&quot;, // 通知</span><br><span class="line">		&quot;webRequest&quot;, // web请求</span><br><span class="line">		&quot;webRequestBlocking&quot;,</span><br><span class="line">		&quot;storage&quot;, // 插件本地存储</span><br><span class="line">		&quot;http://*/*&quot;, // 可以通过executeScript或者insertCSS访问的网站</span><br><span class="line">		&quot;https://*/*&quot; // 可以通过executeScript或者insertCSS访问的网站</span><br><span class="line">	],</span><br><span class="line">	// 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的</span><br><span class="line">	&quot;web_accessible_resources&quot;: [&quot;js/inject.js&quot;],</span><br><span class="line">	// 插件主页，这个很重要，不要浪费了这个免费广告位</span><br><span class="line">	&quot;homepage_url&quot;: &quot;https://www.baidu.com&quot;,</span><br><span class="line">	// 覆盖浏览器默认页面</span><br><span class="line">	&quot;chrome_url_overrides&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		// 覆盖浏览器默认的新标签页</span><br><span class="line">		&quot;newtab&quot;: &quot;newtab.html&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	// Chrome40以前的插件配置页写法</span><br><span class="line">	&quot;options_page&quot;: &quot;options.html&quot;,</span><br><span class="line">	// Chrome40以后的插件配置页写法，如果2个都写，新版Chrome只认后面这一个</span><br><span class="line">	&quot;options_ui&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;page&quot;: &quot;options.html&quot;,</span><br><span class="line">		// 添加一些默认的样式，推荐使用</span><br><span class="line">		&quot;chrome_style&quot;: true</span><br><span class="line">	&#125;,</span><br><span class="line">	// 向地址栏注册一个关键字以提供搜索建议，只能设置一个关键字</span><br><span class="line">	&quot;omnibox&quot;: &#123; &quot;keyword&quot; : &quot;go&quot; &#125;,</span><br><span class="line">	// 默认语言</span><br><span class="line">	&quot;default_locale&quot;: &quot;zh_CN&quot;,</span><br><span class="line">	// devtools页面入口，注意只能指向一个HTML文件，不能是JS文件</span><br><span class="line">	&quot;devtools_page&quot;: &quot;devtools.html&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：点击查看完整的配置文件 <a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="noopener">https://developer.chrome.com/extensions/manifest</a></p>
+<h2 id="Content-scripts"><a href="#Content-scripts" class="headerlink" title="Content-scripts"></a>Content-scripts</h2><p>用来实现向页面注入脚本，可以包括js和css。<br>借助content-scripts，我们可以通过配置的方式向指定页面注入js和css，实现广告屏蔽、页面css定制等功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 需要直接注入页面的JS</span><br><span class="line">	&quot;content_scripts&quot;:</span><br><span class="line">	[</span><br><span class="line">		&#123;</span><br><span class="line">			//&quot;matches&quot;: [&quot;http://*/*&quot;, &quot;https://*/*&quot;],</span><br><span class="line">			// &quot;&lt;all_urls&gt;&quot; 表示匹配所有地址</span><br><span class="line">			&quot;matches&quot;: [&quot;&lt;all_urls&gt;&quot;],</span><br><span class="line">			// 多个JS按顺序注入</span><br><span class="line">			&quot;js&quot;: [&quot;js/jquery-1.8.3.js&quot;, &quot;js/content-script.js&quot;],</span><br><span class="line">			// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式</span><br><span class="line">			&quot;css&quot;: [&quot;css/custom.css&quot;],</span><br><span class="line">			// 代码注入的时间，可选值： &quot;document_start&quot;, &quot;document_end&quot;, or &quot;document_idle&quot;，最后一个表示页面空闲时，默认document_idle</span><br><span class="line">			&quot;run_at&quot;: &quot;document_start&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
+<ol>
+<li>content-scripts和原始页面共享DOM，但是不共享JS。如果要访问的页面的JS（例如某个JS变量），只能通过injected.js来实现。</li>
+<li>Content-scripts不能访问绝大部分chrome.xxx.api，除一下4类：chrome.extension(getURL , inIncognitoContext , lastError , onRequest , sendRequest)、chrome.i18n、chrome.runtime(connect , getManifest , getURL , id , onConnect , onMessage , sendMessage)、chrome.storage。</li>
+<li>通常情况下，content-scripts能够使用的Chrome的API已经够用。如果还需要调用其他的API，可以通过通信的方式让background来协助调用。</li>
+</ol>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Background是一个常驻的页面，它的生命周期是插件中所有类型页面中最长的，随着浏览器打开而打开，浏览器关闭而关闭。所以经常把需要一直运行、启动就运行、全局的代码放在background里面。<br>Background的权限非常高，可以调用几乎全部的Chrome扩展API（除了devtools）以外，并且可以实现无限制跨域。<br>在配置中，background可以通过page指定一张网页，也可以通过scripts直接指定一个JS，Chrome会自动为这个JS生成一个默认的网页。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 会一直常驻的后台JS或后台页面</span><br><span class="line">	&quot;background&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		// 2种指定方式，如果指定JS，那么会自动生成一个背景页</span><br><span class="line">		&quot;page&quot;: &quot;background.html&quot;</span><br><span class="line">		//&quot;scripts&quot;: [&quot;js/background.js&quot;]</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Event-pages"><a href="#Event-pages" class="headerlink" title="Event-pages"></a>Event-pages</h2><p>鉴于background生命周期太长，长时间挂载会影响性能。如果想要实现：在需要加载的时候才被加载（比如第一次安装、更新完成），就可以使用event-pages。<br>它和background之间唯一区别是多了persistent参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;background&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;scripts&quot;: [&quot;event-page.js&quot;],</span><br><span class="line">		&quot;persistent&quot;: false</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="popup"><a href="#popup" class="headerlink" title="popup"></a>popup</h2><p>popup是点击<code>browser_action</code>或者<code>page _action</code>图标时打了的一个小窗口网页，焦点离开网页就立即关闭，一般用来做临时性的交互。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;browser_action&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;default_icon&quot;: &quot;img/icon.png&quot;,</span><br><span class="line">		// 图标悬停时的标题，可选</span><br><span class="line">		&quot;default_title&quot;: &quot;这是一个示例Chrome插件&quot;,</span><br><span class="line">		&quot;default_popup&quot;: &quot;popup.html&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：在权限上和background非常类似，最大的区别是生命周期不同。</p>
+<h2 id="Injected-scripts"><a href="#Injected-scripts" class="headerlink" title="Injected-scripts"></a>Injected-scripts</h2><p>前文说到，content-scripts不能访问页面中的JS。<br>Injected-scripts的目的就是通过DOM操作的方式，向页面注入JS。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 向页面注入JS</span><br><span class="line">function injectCustomJs(jsPath)</span><br><span class="line">&#123;</span><br><span class="line">	jsPath = jsPath || &apos;js/inject.js&apos;;</span><br><span class="line">	var temp = document.createElement(&apos;script&apos;);</span><br><span class="line">	temp.setAttribute(&apos;type&apos;, &apos;text/javascript&apos;);</span><br><span class="line">	// 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js</span><br><span class="line">	temp.src = chrome.extension.getURL(jsPath);</span><br><span class="line">	temp.onload = function()</span><br><span class="line">	&#123;</span><br><span class="line">		// 放在页面不好看，执行完后移除掉</span><br><span class="line">		this.parentNode.removeChild(this);</span><br><span class="line">	&#125;;</span><br><span class="line">	document.head.appendChild(temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩展：想要在web中直接访问扩展中的资源，必须要显式声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	// 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的</span><br><span class="line">	&quot;web_accessible_resources&quot;: [&quot;js/inject.js&quot;],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Homepage-url"><a href="#Homepage-url" class="headerlink" title="Homepage_url"></a>Homepage_url</h2><p>开发者或者扩展主页设置。</p>
+
+      
+
+       -->
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/25/java比较时间/" class="archive-article-date">
-  	<time datetime="2019-10-25T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/25/java比较时间/">java8比较时间</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/24/oracle定时任务/" class="archive-article-date">
-  	<time datetime="2019-10-24T13:34:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/24/oracle定时任务/">oracle定时任务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">oracle</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/23/groovy入门1-使用freemarker/" class="archive-article-date">
-  	<time datetime="2019-10-23T11:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/23/groovy入门1-使用freemarker/">groovy入门1:使用freemarker</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">freemarker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">groovy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/vue-router传递参数的几种方式/" class="archive-article-date">
-  	<time datetime="2019-10-20T13:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/vue-router传递参数的几种方式/">vue-router传递参数的几种方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/18/java并发之AQS/" class="archive-article-date">
-  	<time datetime="2019-10-18T15:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/18/java并发之AQS/">java并发之AQS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/16/mybatis缓存机制/" class="archive-article-date">
-  	<time datetime="2019-10-16T12:46:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/16/mybatis缓存机制/">mybatis缓存机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/15/hexo-博客搭建/" class="archive-article-date">
-  	<time datetime="2019-10-15T12:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/15/hexo-博客搭建/">hexo 博客搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/blog//" class="article-tag-list-link color5">blog</a>
+        			<a href="/categories/Chrome插件//" class="article-tag-list-link color4">Chrome插件</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/13/Chrome扩展简介/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/05/12/MapReduce示例之计数示例/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MapReduce示例之计数示例</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -483,8 +427,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
