@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/10 | boboelele</title>
+  <title>ThreadLocal的使用 | boboelele</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="boboelele">
-<meta property="og:url" content="http://yoursite.com/archives/2019/10/index.html">
+  <meta name="description" content="Java中的ThreadLocal类允许我们创建只能被一个线程读写的变量。如果在一个段代码中含有ThreadLocal变量的引用，即使两个线程同时执行这段代码，他们也无法访问到对方的ThreadLocal变量。【转自并发编程网】">
+<meta name="keywords" content="ThreadLocal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThreadLocal的使用">
+<meta property="og:url" content="http://yoursite.com/2020/05/19/ThreadLocal的使用/index.html">
 <meta property="og:site_name" content="boboelele">
-<meta property="og:description" content="描述">
+<meta property="og:description" content="Java中的ThreadLocal类允许我们创建只能被一个线程读写的变量。如果在一个段代码中含有ThreadLocal变量的引用，即使两个线程同时执行这段代码，他们也无法访问到对方的ThreadLocal变量。【转自并发编程网】">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-19T14:03:52.814Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="boboelele">
-<meta name="twitter:description" content="描述">
+<meta name="twitter:title" content="ThreadLocal的使用">
+<meta name="twitter:description" content="Java中的ThreadLocal类允许我们创建只能被一个线程读写的变量。如果在一个段代码中含有ThreadLocal变量的引用，即使两个线程同时执行这段代码，他们也无法访问到对方的ThreadLocal变量。【转自并发编程网】">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,319 +149,214 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-ThreadLocal的使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ThreadLocal的使用
+    </h1>
+  
+
+        
+        <a href="/2020/05/19/ThreadLocal的使用/" class="archive-article-date">
+  	<time datetime="2020-05-19T11:39:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+          
             
-  
-  
-    
-    
+              <p>Java中的ThreadLocal类允许我们创建只能被一个线程读写的变量。<br>如果在一个段代码中含有ThreadLocal变量的引用，即使两个线程同时执行这段代码，他们也无法访问到对方的ThreadLocal变量。<br>【转自<a href="https://ifeve.com/java-threadlocal%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">并发编程网</a>】</p>
+<a id="more"></a>
+
+<h1 id="创建ThreadLocal变量"><a href="#创建ThreadLocal变量" class="headerlink" title="创建ThreadLocal变量"></a>创建ThreadLocal变量</h1><p>创建ThreadLocal变量非常简单,直接使用new实例化即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal myThreadLocal = new ThreadLocal();</span><br></pre></td></tr></table></figure>
+
+<p>虽然每个线程都能访问到这个ThreadLocal实例，但是每个线程只能访问到自己线程set的值，不能获取其他线程set的值。</p>
+<h1 id="访问ThreadLocal变量"><a href="#访问ThreadLocal变量" class="headerlink" title="访问ThreadLocal变量"></a>访问ThreadLocal变量</h1><p>一旦创建了一个 ThreadLocal 变量，你可以通过如下代码设置某个需要保存的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myThreadLocal.set(&quot;A thread local value”);</span><br></pre></td></tr></table></figure>
+
+<p>可以通过下面方法读取保存在 ThreadLocal 变量中的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String threadLocalValue = (String) myThreadLocal.get();</span><br></pre></td></tr></table></figure>
+
+<p>get() 方法返回一个 Object 对象，set() 对象需要传入一个 Object 类型的参数。</p>
+<h1 id="为ThreadLocal-指定泛型类型"><a href="#为ThreadLocal-指定泛型类型" class="headerlink" title="为ThreadLocal 指定泛型类型"></a>为ThreadLocal 指定泛型类型</h1><p>我们可以创建一个指定泛型类型的 ThreadLocal 对象，这样我们就不需要每次对使用 get() 方法返回的值作强制类型转换了。下面展示了指定泛型类型的 ThreadLocal 例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private ThreadLocal myThreadLocal = new ThreadLocal&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>现在我们只能往 ThreadLocal 对象中存入 String 类型的值了。<br>并且我们从 ThreadLocal 中获取值的时候也不需要强制类型转换了。</p>
+<h1 id="初始化ThreadLocal变量的值"><a href="#初始化ThreadLocal变量的值" class="headerlink" title="初始化ThreadLocal变量的值"></a>初始化ThreadLocal变量的值</h1><p>由于在 ThreadLocal 对象中设置的值只能被设置这个值的线程访问到，线程无法在 ThreadLocal 对象上使用 set() 方法保存一个初始值，并且这个初始值能被所有线程访问到。<br>但是我们可以通过创建一个 ThreadLocal 的子类并且重写 initialValue() 方法，来为一个 ThreadLocal 对象指定一个初始值。就像下面代码展示的那样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private ThreadLocal myThreadLocal = new ThreadLocal&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected String initialValue() &#123;</span><br><span class="line">        return &quot;This is the initial value&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="完整的-ThreadLocal-例子"><a href="#完整的-ThreadLocal-例子" class="headerlink" title="完整的 ThreadLocal 例子"></a>完整的 ThreadLocal 例子</h1><p>下面是一个完整的可执行的 ThreadLocal 例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadLocalExample &#123;</span><br><span class="line"></span><br><span class="line">    public static class MyRunnable implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">        private ThreadLocal threadLocal = new ThreadLocal();</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            threadLocal.set((int) (Math.random() * 100D));</span><br><span class="line">            try &#123;</span><br><span class="line">            Thread.sleep(2000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(threadLocal.get());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">         MyRunnable sharedRunnableInstance = new MyRunnable();</span><br><span class="line">         Thread thread1 = new Thread(sharedRunnableInstance);</span><br><span class="line">         Thread thread2 = new Thread(sharedRunnableInstance);</span><br><span class="line">         thread1.start();</span><br><span class="line">         thread2.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子创建了一个 MyRunnable 实例，并将该实例作为参数传递给两个线程。两个线程分别执行 run() 方法，并且都在 ThreadLocal 实例上保存了不同的值。如果它们访问的不是 ThreadLocal 对象并且调用的 set() 方法被同步了，则第二个线程会覆盖掉第一个线程设置的值。但是，由于它们访问的是一个 ThreadLocal 对象，因此这两个线程都无法看到对方保存的值。也就是说，它们存取的是两个不同的值。</p>
+<h1 id="关于InheritableThreadLocal"><a href="#关于InheritableThreadLocal" class="headerlink" title="关于InheritableThreadLocal"></a>关于InheritableThreadLocal</h1><p>InheritableThreadLocal 类是 ThreadLocal 类的子类。ThreadLocal 中每个线程拥有它自己的值，与 ThreadLocal 不同的是，InheritableThreadLocal 允许一个线程以及该线程创建的所有子线程都可以访问它保存的值。<br>【注：所有子线程都会继承父线程保存的 ThreadLocal 值】</p>
+
+            
+          
+      <!-- 
+        <p>Java中的ThreadLocal类允许我们创建只能被一个线程读写的变量。<br>如果在一个段代码中含有ThreadLocal变量的引用，即使两个线程同时执行这段代码，他们也无法访问到对方的ThreadLocal变量。<br>【转自<a href="https://ifeve.com/java-threadlocal%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">并发编程网</a>】</p>
+<a id="more"></a>
+
+<h1 id="创建ThreadLocal变量"><a href="#创建ThreadLocal变量" class="headerlink" title="创建ThreadLocal变量"></a>创建ThreadLocal变量</h1><p>创建ThreadLocal变量非常简单,直接使用new实例化即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal myThreadLocal = new ThreadLocal();</span><br></pre></td></tr></table></figure>
+
+<p>虽然每个线程都能访问到这个ThreadLocal实例，但是每个线程只能访问到自己线程set的值，不能获取其他线程set的值。</p>
+<h1 id="访问ThreadLocal变量"><a href="#访问ThreadLocal变量" class="headerlink" title="访问ThreadLocal变量"></a>访问ThreadLocal变量</h1><p>一旦创建了一个 ThreadLocal 变量，你可以通过如下代码设置某个需要保存的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myThreadLocal.set(&quot;A thread local value”);</span><br></pre></td></tr></table></figure>
+
+<p>可以通过下面方法读取保存在 ThreadLocal 变量中的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String threadLocalValue = (String) myThreadLocal.get();</span><br></pre></td></tr></table></figure>
+
+<p>get() 方法返回一个 Object 对象，set() 对象需要传入一个 Object 类型的参数。</p>
+<h1 id="为ThreadLocal-指定泛型类型"><a href="#为ThreadLocal-指定泛型类型" class="headerlink" title="为ThreadLocal 指定泛型类型"></a>为ThreadLocal 指定泛型类型</h1><p>我们可以创建一个指定泛型类型的 ThreadLocal 对象，这样我们就不需要每次对使用 get() 方法返回的值作强制类型转换了。下面展示了指定泛型类型的 ThreadLocal 例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private ThreadLocal myThreadLocal = new ThreadLocal&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>现在我们只能往 ThreadLocal 对象中存入 String 类型的值了。<br>并且我们从 ThreadLocal 中获取值的时候也不需要强制类型转换了。</p>
+<h1 id="初始化ThreadLocal变量的值"><a href="#初始化ThreadLocal变量的值" class="headerlink" title="初始化ThreadLocal变量的值"></a>初始化ThreadLocal变量的值</h1><p>由于在 ThreadLocal 对象中设置的值只能被设置这个值的线程访问到，线程无法在 ThreadLocal 对象上使用 set() 方法保存一个初始值，并且这个初始值能被所有线程访问到。<br>但是我们可以通过创建一个 ThreadLocal 的子类并且重写 initialValue() 方法，来为一个 ThreadLocal 对象指定一个初始值。就像下面代码展示的那样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private ThreadLocal myThreadLocal = new ThreadLocal&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected String initialValue() &#123;</span><br><span class="line">        return &quot;This is the initial value&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="完整的-ThreadLocal-例子"><a href="#完整的-ThreadLocal-例子" class="headerlink" title="完整的 ThreadLocal 例子"></a>完整的 ThreadLocal 例子</h1><p>下面是一个完整的可执行的 ThreadLocal 例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadLocalExample &#123;</span><br><span class="line"></span><br><span class="line">    public static class MyRunnable implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">        private ThreadLocal threadLocal = new ThreadLocal();</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            threadLocal.set((int) (Math.random() * 100D));</span><br><span class="line">            try &#123;</span><br><span class="line">            Thread.sleep(2000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(threadLocal.get());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">         MyRunnable sharedRunnableInstance = new MyRunnable();</span><br><span class="line">         Thread thread1 = new Thread(sharedRunnableInstance);</span><br><span class="line">         Thread thread2 = new Thread(sharedRunnableInstance);</span><br><span class="line">         thread1.start();</span><br><span class="line">         thread2.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子创建了一个 MyRunnable 实例，并将该实例作为参数传递给两个线程。两个线程分别执行 run() 方法，并且都在 ThreadLocal 实例上保存了不同的值。如果它们访问的不是 ThreadLocal 对象并且调用的 set() 方法被同步了，则第二个线程会覆盖掉第一个线程设置的值。但是，由于它们访问的是一个 ThreadLocal 对象，因此这两个线程都无法看到对方保存的值。也就是说，它们存取的是两个不同的值。</p>
+<h1 id="关于InheritableThreadLocal"><a href="#关于InheritableThreadLocal" class="headerlink" title="关于InheritableThreadLocal"></a>关于InheritableThreadLocal</h1><p>InheritableThreadLocal 类是 ThreadLocal 类的子类。ThreadLocal 中每个线程拥有它自己的值，与 ThreadLocal 不同的是，InheritableThreadLocal 允许一个线程以及该线程创建的所有子线程都可以访问它保存的值。<br>【注：所有子线程都会继承父线程保存的 ThreadLocal 值】</p>
+
+      
+
+       -->
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/25/java比较时间/" class="archive-article-date">
-  	<time datetime="2019-10-25T14:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/25/java比较时间/">java8比较时间</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ThreadLocal</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/24/oracle定时任务/" class="archive-article-date">
-  	<time datetime="2019-10-24T13:34:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/24/oracle定时任务/">oracle定时任务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">oracle</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/23/groovy入门1-使用freemarker/" class="archive-article-date">
-  	<time datetime="2019-10-23T11:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/23/groovy入门1-使用freemarker/">groovy入门1:使用freemarker</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">freemarker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">groovy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/vue-router传递参数的几种方式/" class="archive-article-date">
-  	<time datetime="2019-10-20T13:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/vue-router传递参数的几种方式/">vue-router传递参数的几种方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/18/java并发之AQS/" class="archive-article-date">
-  	<time datetime="2019-10-18T15:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/18/java并发之AQS/">java并发之AQS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/16/mybatis缓存机制/" class="archive-article-date">
-  	<time datetime="2019-10-16T12:46:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/16/mybatis缓存机制/">mybatis缓存机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/15/hexo-博客搭建/" class="archive-article-date">
-  	<time datetime="2019-10-15T12:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/15/hexo-博客搭建/">hexo 博客搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/blog//" class="article-tag-list-link color5">blog</a>
+        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/19/ThreadLocal的使用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/05/16/MAC使用VIM插件编写、预览plantuml/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MAC使用VIM插件编写、预览plantuml</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -483,8 +379,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
